@@ -1,0 +1,31 @@
+﻿@model Customer
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="display-4">Welcome, @Model.Name</h1>
+<h3>Your Accounts:</h3> 
+<table class="table">
+    <tr>
+        <th>Account Number</th>
+        <th>Account Type</th>
+        <th>Balance</th>
+        <th>Modify Date</th>
+        <th></th>
+    </tr>
+    @foreach (var account in Model.Accounts)
+    {
+<tr>
+    <td>@Html.DisplayFor(x => account.AccountNumber)</td>
+    <td>@Html.DisplayFor(x => account.AccountType)</td>
+    <td>@Html.DisplayFor(x => account.Balance)</td>
+    <td>@Html.DisplayFor(x => account.ModifyDate)</td>
+    <td>
+          <a class="btn btn-primary" asp-action="History" asp-route-id="@account.AccountNumber">Transaction History </a>
+   </td>
+</tr>        
+    }
+</table>
+
+

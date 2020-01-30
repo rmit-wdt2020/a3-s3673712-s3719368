@@ -1,0 +1,76 @@
+﻿@model IPagedList<BillPay>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+
+@{
+    ViewData["Title"] = "listPayment";
+}
+
+<h1>Payment lists</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Account Number
+            </th>
+            <th>
+                Payee number
+            </th>
+            <th>
+               Amount
+            </th>
+            <th>
+                Schedule Date
+            </th>
+            <th>
+                Period
+            </th>
+            <th>
+                Modify Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Payee.PayeeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScheduleDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Period)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifyDate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.BillPayID">Modify</a> |
+                    <a asp-action="Delete" asp-route-id="@item.BillPayID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("listPayment", new { page }),
+        new PagedListRenderOptions
+        {
+            LiElementClasses = new[] { "page-item" },
+            PageClasses = new[] { "page-link" }
+        })
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,81 @@
+﻿@model Customer
+
+@{ViewData["Title"] = "MyProfile";
+}
+<h1 class="display-4">Welcome, @Model.Name</h1>
+<a class="btn btn-primary" asp-action="ChangePassword" asp-route-id="">Change Your Password</a>
+        <h3>Your Profile:</h3>
+
+
+        <form asp-action="Edit">
+
+            <p>
+                Name:
+
+                <a>
+                    <input type="text" class="form-control" name="name" value="@Model.Name" data-val="true"
+                           data-val-required="The Name field is required.">
+                </a>
+              
+            </p>
+
+
+            <p>
+                Address:
+
+                <a><input type="text" class="form-control" name="address" value="@Model.Address" data-val="true"></a>
+            </p>
+
+
+            <p>
+                City:
+
+                <a><input type="text" class="form-control" name="city" value="@Model.City" data-val="true"></a>
+
+            </p>
+            <p>
+                Postcode:
+
+                <a><input type="text" class="form-control" name="postcode" value="@Model.PostCode" data-val="true"></a>
+                @Html.ValidationMessage("postcode", new { @class = "text-danger" })
+            </p>
+
+            <p>
+                State:
+
+                <a><input type="text" class="form-control" name="state" value="@Model.State" data-val="true"></a>
+                @Html.ValidationMessage("state", new { @class = "text-danger" })
+            </p>
+
+
+            <p>
+                TFN:
+
+                <a><input type="text" class="form-control" name="tfn" value="@Model.TFN" data-val="true"></a>
+
+            </p>
+
+
+            <p>
+                Phone:
+
+                <a>
+                    <input type="text" class="form-control" name="phone" value="@Model.Phone" data-val="true"
+                           data-val-required="The Phone field is required.">
+                </a>
+                @Html.ValidationMessage("phone", new { @class = "text-danger" })
+            </p>
+
+
+            <p>
+                <input type="submit" class="btn btn-primary"
+                       value="Edit">
+               
+
+            </p>
+
+        </form>
+       
+        @section Scripts {
+            @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+        }

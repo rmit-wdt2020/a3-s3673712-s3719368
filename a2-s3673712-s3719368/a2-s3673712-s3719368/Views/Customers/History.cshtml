@@ -1,0 +1,42 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@model IPagedList<Transaction>
+
+@{
+    ViewData["Title"] = "Transaction History";
+}
+
+<h1>Transaction History: @ViewBag.AccountNumber</h1>
+<table class="table">
+    <tr>
+        <th>TransactionType</th>
+        <th>AccountNumber</th>
+        <th>DestinationAccountNumber</th>
+        <th>Amount</th>
+        <th>Comment</th>
+        <th>TransactionTimeUtc</th>
+    </tr>
+    @foreach (var Transaction in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(x => Transaction.TransactionType)</td>
+            <td>@Html.DisplayFor(x => Transaction.AccountNumber)</td>
+            <td>@Html.DisplayFor(x => Transaction.DestinationAccountNumber)</td>
+            <td>@Html.DisplayFor(x => Transaction.Amount)</td>
+            <td>@Html.DisplayFor(x => Transaction.Comment)</td>
+            <td>@Html.DisplayFor(x => Transaction.TransactionTimeUtc)</td>
+        </tr>
+    }
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("History", new { page }),
+        new PagedListRenderOptions
+        {
+            LiElementClasses = new[] { "page-item" },
+            PageClasses = new[] { "page-link" }
+        })
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

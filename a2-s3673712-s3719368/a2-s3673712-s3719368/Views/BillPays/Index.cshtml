@@ -1,0 +1,30 @@
+﻿@model Customer
+
+@{
+    ViewData["Title"] = "Account Payment";
+}
+
+<h1 class="display-4">Account Payment</h1>
+<h3>Your Accounts:</h3>
+
+<table class="table">
+    <tr>
+        <th>Account Number</th>
+        <th>Account Type</th>
+        <th>Payment Numbers</th>
+        <th></th>
+    </tr>
+    @foreach (var account in Model.Accounts)
+    {
+        <tr>
+            <td>@Html.DisplayFor(x => account.AccountNumber)</td>
+            <td>@account.AccountType.ToString()</td>
+            <td>@account.BillPays.Count()</td>
+            <td>
+                <a class="btn btn-primary" asp-action="listPayment" asp-route-id="@account.AccountNumber">View Payments</a>
+                <a class="btn btn-primary" asp-action="addPayment" asp-route-id="@account.AccountNumber">Schedule Payment</a>
+            </td>
+        </tr>
+
+    }
+</table>
