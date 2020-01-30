@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using a2_s3673712_s3719368.Attributes;
 using a2_s3673712_s3719368.Data;
 using a2_s3673712_s3719368.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SimpleHashing;
 
 namespace a2_s3673712_s3719368.Controllers
 {
-    [Route("Bank/[controller]")]
     [AuthorizeCustomer]
     public class MyProfileController : Controller
     {
@@ -84,8 +81,9 @@ namespace a2_s3673712_s3719368.Controllers
         public async Task<IActionResult> ChangePassword(string oldPassword, string newPassword, string confirmPassword)
         {
             var customer = await _context.Logins.FindAsync(CustomerID.ToString());
-            var logins =  _context.Logins.Where(c => c.CustomerID == CustomerID).ToList(); //Return list of Login that match customerID
-            var login = logins[0];
+            //var logins =  _context.Logins.Where(c => c.CustomerID == CustomerID).ToList(); //Return list of Login that match customerID
+            //var login = logins[0];
+            var login = await _context.Logins.Include(x => x.Customer).FirstOrDefaultAsync(x => x.CustomerID == CustomerID);
             //Validation
             if (login == null)
             {

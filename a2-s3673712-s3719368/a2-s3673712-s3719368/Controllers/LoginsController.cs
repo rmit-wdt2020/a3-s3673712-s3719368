@@ -10,8 +10,8 @@ using a2_s3673712_s3719368.Attributes;
 
 namespace a2_s3673712_s3719368.Controllers
 {
- 
-    [Route("Bank/[controller]")]
+
+    [Route("Bank/SecureLogin")]
     public class LoginsController : Controller
     {
         private readonly NationBankContext _context;
@@ -47,7 +47,7 @@ namespace a2_s3673712_s3719368.Controllers
             // Login customer.
             HttpContext.Session.SetInt32(nameof(Customer.CustomerID), login.CustomerID);
             HttpContext.Session.SetString(nameof(Customer.Name), login.Customer.Name);
-
+            
             return RedirectToAction("Index", "Customers");
         }
 

@@ -11,7 +11,7 @@ using a2_s3673712_s3719368.LogicManger;
 
 namespace a2_s3673712_s3719368.Controllers
 {
-    [Route("Bank/[controller]")]
+    
     [AuthorizeCustomer]
     public class ATMController : Controller
     {
