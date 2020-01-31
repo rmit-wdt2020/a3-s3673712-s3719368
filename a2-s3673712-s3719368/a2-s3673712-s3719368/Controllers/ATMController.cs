@@ -18,21 +18,22 @@ namespace a2_s3673712_s3719368.Controllers
         private readonly NationBankContext _context;
         private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value; //get CustomerID from session
         private List<Account> accountList;
-        private TransferManger manger { get; set; }
+        private TransferManger manager;
+        private TransferManger Manager { get
+            {
+                if (manager == null)
+                {
+                    manager = new TransferManger(_context, this, CustomerID);
+                }
+                return manager;
+            }  }
 
         public ATMController(NationBankContext context)
         {
             _context = context;
         }
 
-        public TransferManger GetManger()
-        {
-            if (manger == null)
-            {
-                manger = new TransferManger(_context, this, CustomerID);
-            }
-            return manger;
-        }
+    
 
         // GET: ATM
         public async Task<IActionResult> Transfer()
@@ -49,9 +50,9 @@ namespace a2_s3673712_s3719368.Controllers
         public async Task<IActionResult> Transfer(string TransactionType, int FromAccount, int ToAccount, decimal amount, string Comment)
         {
             var customer = await _context.Customers.FindAsync(CustomerID);
-            TransferManger manger = GetManger();
+          
             accountList = _context.Accounts.ToList();
-            manger.WithDrawOrDepositCheck(FromAccount,amount);
+            Manager.WithDrawOrDepositCheck(FromAccount,amount);
             if (!ModelState.IsValid)
             {
                 ViewBag.Amount = amount;
@@ -61,11 +62,11 @@ namespace a2_s3673712_s3719368.Controllers
             switch (TransactionType) 
             {
                 case "D":
-                    if (await manger.Deposit(FromAccount, amount))
+                    if (await Manager.Deposit(FromAccount, amount))
                      return RedirectToAction("Index", "Customers");
                     break;
                 case "W":
-                    if (await manger.Withdraw(FromAccount, amount))
+                    if (await Manager.Withdraw(FromAccount, amount))
                     {
                         return RedirectToAction("Index", "Customers");
                     }
@@ -77,7 +78,7 @@ namespace a2_s3673712_s3719368.Controllers
                         return View(customer);
                     }
                 case "T":
-                    if (await manger.Transfer(FromAccount, ToAccount, amount, Comment))
+                    if (await Manager.Transfer(FromAccount, ToAccount, amount, Comment))
                     {
                         return RedirectToAction("Index", "Customers");
                     }
