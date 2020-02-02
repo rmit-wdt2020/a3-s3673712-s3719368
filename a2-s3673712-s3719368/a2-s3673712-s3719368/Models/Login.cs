@@ -23,6 +23,10 @@ namespace a2_s3673712_s3719368.Models
         [Required]
         public DateTime ModifyDate { get; set; }
 
+        public bool Lock { get; set; }
+        public DateTime LockDate { get; set; }
+        public int attempt { get; set; }
+
         //Update password to database
         public void UpdatePassword(string newPassword)
         {
