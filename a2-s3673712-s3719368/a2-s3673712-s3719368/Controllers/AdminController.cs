@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using a2_s3673712_s3719368.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace a2_s3673712_s3719368.Controllers
@@ -33,7 +34,8 @@ namespace a2_s3673712_s3719368.Controllers
                 ViewBag.LoginID = LoginID;
                 return View();
             }
-
+            
+            HttpContext.Session.SetString("Admin", LoginID);
             return View();
         }
     }
