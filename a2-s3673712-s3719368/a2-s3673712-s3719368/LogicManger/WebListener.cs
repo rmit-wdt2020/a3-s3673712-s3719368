@@ -41,7 +41,9 @@ namespace a2_s3673712_s3719368.LogicManger
                     {
                         var context = scope.ServiceProvider.GetRequiredService<NationBankContext>();
                         List<BillPay> bills = context.BillPays.ToList();
-                        foreach (BillPay bill in bills) 
+                        List<Login> Logins = context.Logins.ToList();
+
+                        foreach (BillPay bill in bills) //check due bills.
                         {
                             if (bill.ScheduleDate.ToString() == DateTime.UtcNow.ToString()) 
                             {
@@ -50,6 +52,16 @@ namespace a2_s3673712_s3719368.LogicManger
                                 await PayBill(bill, context);
                             }
                         }
+
+                        foreach (Login login in Logins)  //check  locked logins
+                        {
+                            if (login.Lock == true && login.LockDate.AddMinutes(1).ToString() == DateTime.UtcNow.ToString())
+                            {
+                                await Unlock(login, context);
+                            }
+                        }
+
+
                     }
                    
                      
@@ -61,6 +73,12 @@ namespace a2_s3673712_s3719368.LogicManger
                  }
             }
 
+        }
+
+        public async Task Unlock(Login login, NationBankContext _context) {
+            login.Lock = false;
+            login.attempt = 0;
+            await _context.SaveChangesAsync();
         }
 
         public async Task PayBill(BillPay bill, NationBankContext _context) 

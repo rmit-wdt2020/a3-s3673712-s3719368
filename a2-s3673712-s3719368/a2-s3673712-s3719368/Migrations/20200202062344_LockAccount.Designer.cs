@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using a2_s3673712_s3719368.Data;
 
 namespace a2_s3673712_s3719368.Migrations
 {
     [DbContext(typeof(NationBankContext))]
-    partial class NationBankContextModelSnapshot : ModelSnapshot
+    [Migration("20200202062344_LockAccount")]
+    partial class LockAccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
