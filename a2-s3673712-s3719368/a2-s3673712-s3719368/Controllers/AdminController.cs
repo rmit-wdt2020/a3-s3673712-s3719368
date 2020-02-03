@@ -19,5 +19,22 @@ namespace a2_s3673712_s3719368.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Login(string LoginID, string password)
+        {
+            if (!(LoginID == "admin" && password == "admin")) 
+            {
+                ModelState.AddModelError("LoginFailed", "Login failed, please try again.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.LoginID = LoginID;
+                return View();
+            }
+
+            return View();
+        }
     }
 }
