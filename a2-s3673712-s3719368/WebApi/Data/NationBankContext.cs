@@ -151,16 +151,7 @@ namespace WebApi.Models
                 entity.Property(e => e.State).HasMaxLength(3);
             });
 
-            modelBuilder.Entity<Person>(entity =>
-            {
-                entity.Property(e => e.PersonId)
-                    .HasColumnName("PersonID")
-                    .ValueGeneratedNever();
 
-                entity.Property(e => e.FirstName).IsRequired();
-
-                entity.Property(e => e.LastName).IsRequired();
-            });
 
             modelBuilder.Entity<Transactions>(entity =>
             {
