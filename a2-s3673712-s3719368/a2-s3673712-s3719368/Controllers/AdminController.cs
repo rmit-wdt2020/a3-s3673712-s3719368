@@ -36,7 +36,14 @@ namespace a2_s3673712_s3719368.Controllers
             }
             
             HttpContext.Session.SetString("Admin", LoginID);
-            return View();
+            return RedirectToAction("Index", "CustomersMange");
+        }
+
+        [Route("LogoutNow")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
