@@ -1,0 +1,19 @@
+﻿@model IEnumerable<a2_s3673712_s3719368.Area.Admin.Models.AccountDto>
+@{
+    ViewData["Title"] = "SelectTransaction";
+}
+
+<h1>Select Account Transaction</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <label for="Account" class="control-label">Select Account: </label>
+        <select id="Account" name="Account" class="form-control" data-val="true">
+            @foreach (var account in Model)
+            {
+
+                <option value="@account.AccountNumber" data-val="true">@account.AccountNumber</option>
+            }
+        </select>
+    </div>
+</div>
