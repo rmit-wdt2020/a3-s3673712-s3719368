@@ -80,6 +80,7 @@ namespace a2_s3673712_s3719368
                 endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+                
 
             });
         }
