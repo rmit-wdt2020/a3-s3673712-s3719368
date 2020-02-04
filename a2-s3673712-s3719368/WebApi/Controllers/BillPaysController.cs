@@ -2,51 +2,50 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using a2_s3673712_s3719368.Models;
-using BankAPI.Models.DataManager;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models;
+using WebApi.Models.DataManager;
 
-namespace BankAPI.Controllers
+namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginsController : ControllerBase
+    public class BillPaysController : ControllerBase
     {
-        private readonly LoginManager _repo;
+        private readonly BillPayManager _repo;
 
-        public LoginsController(LoginManager repo)
+        public BillPaysController(BillPayManager repo)
         {
             _repo = repo;
         }
 
         // GET: api/movies
         [HttpGet]
-        public IEnumerable<Logins> Get()
+        public IEnumerable<BillPays> Get()
         {
             return _repo.GetAll();
         }
 
         // GET api/movies/1
         [HttpGet("{id}")]
-        public Logins Get(int id)
+        public BillPays Get(int id)
         {
             return _repo.Get(id);
         }
 
         // POST api/movies
         [HttpPost]
-        public void Post([FromBody] Logins login)
+        public void Post([FromBody] BillPays billpay)
         {
-            _repo.Add(login);
+            _repo.Add(billpay);
         }
 
         // PUT api/movies
         [HttpPut]
-        public void Put([FromBody] Logins login)
+        public void Put([FromBody] BillPays billpay)
         {
-            _repo.Update(Convert.ToInt32(login.LoginId), login);
+            _repo.Update(billpay.BillPayId, billpay);
         }
 
         // DELETE api/movies/1

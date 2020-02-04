@@ -26,7 +26,7 @@ namespace BankAPI.Models.DataManager
 
         public IEnumerable<Customers> GetAll()
         {
-            return _context.Customers.Include( c => c.Accounts);
+            return _context.Customers.Include( c => c.Accounts).ToList();
         }
 
         public int Add(Customers customer)

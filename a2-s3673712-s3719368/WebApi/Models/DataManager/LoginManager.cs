@@ -1,6 +1,7 @@
 ﻿
 using a2_s3673712_s3719368.Models;
 using a2_s3673712_s3719368.Models.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace BankAPI.Models.DataManager
 
         public IEnumerable<Logins> GetAll()
         {
-            return _context.Logins.ToList();
+            return _context.Logins.Include(c => c.Customer).ThenInclude(a => a.Accounts).ToList();
         }
 
         public int Add(Logins login)
@@ -33,7 +34,7 @@ namespace BankAPI.Models.DataManager
             _context.Logins.Add(login);
             _context.SaveChanges();
 
-            return login.CustomerId;
+            return Convert.ToInt32(login.LoginId);
         }
 
         public int Delete(int id)

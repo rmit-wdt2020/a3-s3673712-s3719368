@@ -1,6 +1,7 @@
 ﻿
 using a2_s3673712_s3719368.Models;
 using a2_s3673712_s3719368.Models.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace BankAPI.Models.DataManager
 
         public IEnumerable<Accounts> GetAll()
         {
-            return _context.Accounts.ToList();
+            return _context.Accounts.Include(c => c.Customer).ToList();
         }
 
         public int Add(Accounts account)
