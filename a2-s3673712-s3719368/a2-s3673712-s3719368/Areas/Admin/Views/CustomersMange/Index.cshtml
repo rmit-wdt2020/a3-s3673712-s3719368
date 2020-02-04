@@ -1,4 +1,4 @@
-﻿@model IEnumerable<a2_s3673712_s3719368.Models.Customer>
+﻿@model IEnumerable<a2_s3673712_s3719368.Area.Admin.Models.CustomerDto>
 
 @{
     ViewData["Title"] = "Index";
@@ -60,7 +60,9 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CustomerID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.CustomerID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CustomerID">Delete</a>
+                <a asp-action="Lock" asp-route-id="@item.CustomerID">Lock</a> |
+                <a asp-action="Delete" asp-route-id="@item.CustomerID">Delete</a> |
+
             </td>
         </tr>
 }

@@ -7,6 +7,7 @@ using BankAPI.Models.DataManager;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models;
+using WebApi.Models.DataManager;
 
 namespace BankAPI.Controllers
 {
@@ -23,30 +24,30 @@ namespace BankAPI.Controllers
 
         // GET: api/movies
         [HttpGet]
-        public IEnumerable<Logins> Get()
+        public IEnumerable<Login> Get()
         {
             return _repo.GetAll();
         }
 
         // GET api/movies/1
         [HttpGet("{id}")]
-        public Logins Get(int id)
+        public Login Get(int id)
         {
             return _repo.Get(id);
         }
 
         // POST api/movies
         [HttpPost]
-        public void Post([FromBody] Logins login)
+        public void Post([FromBody] Login login)
         {
             _repo.Add(login);
         }
 
         // PUT api/movies
         [HttpPut]
-        public void Put([FromBody] Logins login)
+        public void Put([FromBody] Login login)
         {
-            _repo.Update(Convert.ToInt32(login.LoginId), login);
+            _repo.Update(Convert.ToInt32(login.LoginID), login);
         }
 
         // DELETE api/movies/1

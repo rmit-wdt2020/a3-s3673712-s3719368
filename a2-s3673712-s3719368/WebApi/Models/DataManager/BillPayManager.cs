@@ -1,13 +1,15 @@
-﻿using a2_s3673712_s3719368.Models.Repository;
+﻿
+using a2_s3673712_s3719368.Models.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Data;
 
 namespace WebApi.Models.DataManager
 {
-    public class BillPayManager : IDataRepository<BillPays, int>
+    public class BillPayManager : IDataRepository<BillPay, int>
     {
         private readonly NationBankContext _context;
 
@@ -16,22 +18,22 @@ namespace WebApi.Models.DataManager
             _context = context;
         }
 
-        public BillPays Get(int id)
+        public BillPay Get(int id)
         {
             return _context.BillPays.Find(id);
         }
 
-        public IEnumerable<BillPays> GetAll()
+        public IEnumerable<BillPay> GetAll()
         {
-            return _context.BillPays.Include(a => a.AccountNumberNavigation).ToList();
+            return _context.BillPays.Include(a => a.AccountNumber).ToList();
         }
 
-        public int Add(BillPays bill)
+        public int Add(BillPay bill)
         {
             _context.BillPays.Add(bill);
             _context.SaveChanges();
 
-            return bill.BillPayId;
+            return bill.BillPayID;
         }
 
         public int Delete(int id)
@@ -42,7 +44,7 @@ namespace WebApi.Models.DataManager
             return id;
         }
 
-        public int Update(int id, BillPays bill)
+        public int Update(int id, BillPay bill)
         {
             _context.Update(bill);
             _context.SaveChanges();

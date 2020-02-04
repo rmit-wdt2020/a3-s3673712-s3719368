@@ -7,22 +7,30 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using a2_s3673712_s3719368.Data;
 using a2_s3673712_s3719368.Models;
+using a2_s3673712_s3719368.Area.Admin.Models;
+using Newtonsoft.Json;
+using a2_s3673712_s3719368.Areas.Admin.Controllers.Managers;
+using a2_s3673712_s3719368.Attributes;
 
 namespace a2_s3673712_s3719368.Controllers
 {
+    [AuthorizeAdmin]
     public class CustomersMangeController : Controller
     {
-        private readonly NationBankContext _context;
+        private CustomerManger customerManger;
+        private LoginManger loginManger;
 
         public CustomersMangeController(NationBankContext context)
         {
-            _context = context;
+            customerManger = new CustomerManger();
+            loginManger = new LoginManger();
         }
 
         // GET: CustomersMange
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Customers.ToListAsync());
+            var customers = await customerManger.GetAllCustomers();
+            return View(customers);
         }
 
         // GET: CustomersMange/Details/5
@@ -33,8 +41,8 @@ namespace a2_s3673712_s3719368.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.CustomerID == id);
+            var customer = await customerManger.GetCustomer(id);
+
             if (customer == null)
             {
                 return NotFound();
@@ -55,46 +63,32 @@ namespace a2_s3673712_s3719368.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await customerManger.GetCustomer(id);
+
             if (customer == null)
             {
                 return NotFound();
             }
+
             return View(customer);
         }
 
         // POST: CustomersMange/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerID,Name,TFN,Address,City,PostCode,State,Phone")] Customer customer)
+        public IActionResult Edit(int CustomerID, CustomerDto customer)
         {
-            if (id != customer.CustomerID)
-            {
+            if (CustomerID != customer.CustomerID)
                 return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
-                try
+                if (customerManger.Edit(customer))
                 {
-                    _context.Update(customer);
-                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CustomerExists(customer.CustomerID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
             }
+
             return View(customer);
         }
 
@@ -106,8 +100,7 @@ namespace a2_s3673712_s3719368.Controllers
                 return NotFound();
             }
 
-            var customer = await _context.Customers
-                .FirstOrDefaultAsync(m => m.CustomerID == id);
+            var customer = await customerManger.GetCustomer(id);
             if (customer == null)
             {
                 return NotFound();
@@ -119,17 +112,54 @@ namespace a2_s3673712_s3719368.Controllers
         // POST: CustomersMange/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            _context.Customers.Remove(customer);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (customerManger.delete(id))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return NotFound(); //error page here
         }
 
-        private bool CustomerExists(int id)
+        // GET: CustomersMange/Lock/5
+        public async Task<IActionResult> Lock(int? id)
         {
-            return _context.Customers.Any(e => e.CustomerID == id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var login = await loginManger.GetLogin(id);
+            if (login == null)
+            {
+                return NotFound();
+            }
+
+            return View(login);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Lock(int id,int CustomerID)
+        {
+            var login = await loginManger.GetLogin(CustomerID);
+            bool status;
+            if (login.Lock == true)
+            {
+                status = false;
+            }
+            else {
+                status = true;
+            }
+
+            if (loginManger.Lock(login, status)) 
+            {
+                return View(login);
+            }
+
+            return NotFound();
+        }
+
+
     }
 }

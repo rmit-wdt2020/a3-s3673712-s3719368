@@ -72,13 +72,17 @@ namespace a2_s3673712_s3719368
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
+
+                endpoints.MapAreaControllerRoute(
+               "admin",
+               "admin",
+                pattern: "{controller=Admin}/{action=Login}");
 
                 endpoints.MapControllerRoute(
-                    name: "AdminProtal",
-                    pattern: "{controller=Admin}/Secure/{action=Login}");
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
             });
         }
     }

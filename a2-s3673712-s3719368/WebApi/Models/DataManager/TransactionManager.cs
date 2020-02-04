@@ -1,13 +1,16 @@
-﻿using a2_s3673712_s3719368.Models.Repository;
+﻿
+using a2_s3673712_s3719368.Models;
+using a2_s3673712_s3719368.Models.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Data;
 
 namespace WebApi.Models.DataManager
 {
-    public class TransactionManager : IDataRepository<Transactions, int>
+    public class TransactionManager : IDataRepository<Transaction, int>
     {
         private readonly NationBankContext _context;
 
@@ -16,22 +19,23 @@ namespace WebApi.Models.DataManager
             _context = context;
         }
 
-        public Transactions Get(int id)
+        public Transaction Get(int id)
         {
             return _context.Transactions.Find(id);
         }
 
-        public IEnumerable<Transactions> GetAll()
+        public IEnumerable<Transaction> GetAll()
         {
-            return _context.Transactions.Include(a => a.AccountNumberNavigation).ThenInclude(a => a.TransactionsDestinationAccountNumberNavigation).ToList();
+            //  return _context.Transactions.Include(a => a.AccountNumber).ThenInclude(a => a.de).ToList();
+            return null;
         }
 
-        public int Add(Transactions transaction)
+        public int Add(Transaction transaction)
         {
             _context.Transactions.Add(transaction);
             _context.SaveChanges();
 
-            return transaction.TransactionId;
+            return transaction.TransactionID;
         }
 
         public int Delete(int id)
@@ -42,7 +46,7 @@ namespace WebApi.Models.DataManager
             return id;
         }
 
-        public int Update(int id, Transactions transaction)
+        public int Update(int id, Transaction transaction)
         {
             _context.Update(transaction);
             _context.SaveChanges();

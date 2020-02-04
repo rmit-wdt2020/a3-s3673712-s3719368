@@ -1,16 +1,16 @@
 ﻿
-using a2_s3673712_s3719368.Models;
 using a2_s3673712_s3719368.Models.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Data;
 using WebApi.Models;
 
 namespace BankAPI.Models.DataManager
 {
-    public class CustomerManager : IDataRepository<Customers, int>
+    public class CustomerManager : IDataRepository<Customer, int>
     {
         private readonly NationBankContext _context;
 
@@ -19,22 +19,22 @@ namespace BankAPI.Models.DataManager
             _context = context;
         }
 
-        public Customers Get(int id)
+        public Customer Get(int id)
         {
             return _context.Customers.Find(id);
         }
 
-        public IEnumerable<Customers> GetAll()
+        public IEnumerable<Customer> GetAll()
         {
             return _context.Customers.Include( c => c.Accounts).ToList();
         }
 
-        public int Add(Customers customer)
+        public int Add(Customer customer)
         {
             _context.Customers.Add(customer);
             _context.SaveChanges();
 
-            return customer.CustomerId;
+            return customer.CustomerID;
         }
 
         public int Delete(int id)
@@ -45,7 +45,7 @@ namespace BankAPI.Models.DataManager
             return id;
         }
 
-        public int Update(int id, Customers customer)
+        public int Update(int id, Customer customer)
         {
             _context.Update(customer);
             _context.SaveChanges();
