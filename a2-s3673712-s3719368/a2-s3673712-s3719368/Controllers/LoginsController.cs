@@ -15,13 +15,14 @@ namespace a2_s3673712_s3719368.Controllers
     public class LoginsController : Controller
     {
         private readonly NationBankContext _context;
-        
+
         public LoginsController(NationBankContext context)
         {
             _context = context;
         }
         //Go to Log in view (start of the application)
-        public IActionResult Login() {
+        public IActionResult Login()
+        {
             if (HttpContext.Session.GetInt32(nameof(Customer.CustomerID)) != null)
             {
                 return RedirectToAction("Index", "Customers");
@@ -37,11 +38,6 @@ namespace a2_s3673712_s3719368.Controllers
         public async Task<IActionResult> Login(string loginID, string password)
         {
             var login = await _context.Logins.FindAsync(loginID);
-            if (login.Lock == true) {
-                ModelState.AddModelError("LoginFailed", "This login account is being locked, please try again after 1 min.");
-                return View(new Login { LoginID = loginID });
-            }
-
             //Validation
             if (login == null || !PBKDF2.Verify(login.PasswordHash, password))
             {
@@ -62,7 +58,7 @@ namespace a2_s3673712_s3719368.Controllers
             login.attempt = 0;//reset the attempt
             HttpContext.Session.SetInt32(nameof(Customer.CustomerID), login.CustomerID);
             HttpContext.Session.SetString(nameof(Customer.Name), login.Customer.Name);
-            
+
             return RedirectToAction("Index", "Customers");
         }
 
