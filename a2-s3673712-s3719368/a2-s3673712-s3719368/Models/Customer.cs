@@ -31,7 +31,7 @@ namespace a2_s3673712_s3719368.Models
         [StringLength(3)]
         public string State { get; set; }
 
-        [Required, RegularExpression(@"^[61][0-9]{8}$",
+        [Required, RegularExpression(@"^[61][0-9]{9}$",
          ErrorMessage = "Wrong number format.")]
         public string Phone { get; set; }
 
