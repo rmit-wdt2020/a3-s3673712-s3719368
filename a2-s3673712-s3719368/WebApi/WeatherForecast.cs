@@ -1,6 +1,6 @@
 using System;
 
-namespace WebBankApi
+namespace WebApi
 {
     public class WeatherForecast
     {
