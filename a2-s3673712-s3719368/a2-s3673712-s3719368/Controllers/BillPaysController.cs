@@ -11,16 +11,27 @@ using X.PagedList;
 
 namespace a2_s3673712_s3719368.Controllers
 {
-   
+
     [AuthorizeCustomer]
     public class BillPaysController : Controller
     {
         private int CustomerID => HttpContext.Session.GetInt32(nameof(Customer.CustomerID)).Value; //get CustomerID from session
         private readonly NationBankContext _context;
         private int pageSize;
-        private PaymentManger manger { get; set; }
+        private PaymentManger manager;
+        private PaymentManger Manager
+        {
+            get
+            {
+                if (manager == null)
+                {
+                    manager = new PaymentManger(_context, this, CustomerID);
+                }
+                return manager;
+            }
+        }
 
-        public BillPaysController(NationBankContext context) 
+        public BillPaysController(NationBankContext context)
         {
             _context = context;
         }
@@ -33,20 +44,13 @@ namespace a2_s3673712_s3719368.Controllers
         }
 
         //Hide the logics
-        public PaymentManger GetManger() 
-        {
-            if (manger == null) 
-            {
-              manger = new PaymentManger(_context, this, CustomerID);
-            }
-            return manger;
-        }
+
 
         public async Task<IActionResult> ListPayment(int? id, int? page = 1)
         {
-            PaymentManger manger = GetManger();
+
             Account account = await _context.Accounts.FindAsync(id);
-            if (!(await manger.CheckNull(id)))
+            if (!(await Manager.CheckNull(id)))
             {//check if the customer own this account
                 return NotFound();
             }
@@ -62,8 +66,8 @@ namespace a2_s3673712_s3719368.Controllers
 
         public async Task<IActionResult> AddPayment(int? id)
         {
-            PaymentManger manger = GetManger();
-            if (!await manger.CheckNull(id))
+
+            if (!await Manager.CheckNull(id))
             {//check if the customer own this account
                 return NotFound();
             }
@@ -75,9 +79,9 @@ namespace a2_s3673712_s3719368.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPayment(int? id, int PayeeID, decimal Amount, DateTime ScheduleDate, Period Period)
         {
-            PaymentManger manger = GetManger();
+
             Account account = await _context.Accounts.FindAsync(id);
-            if (await manger.InsertPayment(id, PayeeID, Amount, ScheduleDate, Period))
+            if (await Manager.InsertPayment(id, PayeeID, Amount, ScheduleDate, Period))
             {
                 return RedirectToAction("Index", "BillPays");
             }
@@ -91,14 +95,14 @@ namespace a2_s3673712_s3719368.Controllers
 
         }
 
-        public async Task<IActionResult> Delete(int? id) 
+        public async Task<IActionResult> Delete(int? id)
         {
-            PaymentManger manger = GetManger();
-            if (await manger.DeletePayment(id))
+
+            if (await Manager.DeletePayment(id))
             {
                 return RedirectToAction(nameof(Index));
             }
-            else 
+            else
             {
                 return NotFound();
             }
@@ -106,7 +110,7 @@ namespace a2_s3673712_s3719368.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
-            PaymentManger manger = GetManger();
+
             if (id == null)
             {
                 return NotFound();
@@ -130,8 +134,8 @@ namespace a2_s3673712_s3719368.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BillPayID,AccountNumber,PayeeID,Amount,ScheduleDate,Period,ModifyDate")] BillPay billPay)
         {
-            PaymentManger manger = GetManger();
-            if (await manger.EditPayment(id, billPay)) 
+
+            if (await Manager.EditPayment(id, billPay))
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -145,7 +149,7 @@ namespace a2_s3673712_s3719368.Controllers
             }
         }
 
- 
+
 
     }
 }
