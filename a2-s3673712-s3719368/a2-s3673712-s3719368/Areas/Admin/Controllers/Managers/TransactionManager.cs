@@ -37,7 +37,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
         public IEnumerable<TransactionDto> FliterByDate(IEnumerable<TransactionDto> transactions, DateTime FromDate, DateTime ToDate) 
         {
             List<TransactionDto> transactionArray = transactions.ToList();
-            for (int i = 0; i < transactions.Count(); i++) 
+            for (int i = 0; i < transactionArray.Count(); i++) 
             {
                 if (transactionArray[i].TransactionTimeUtc < FromDate.ToUniversalTime() || transactionArray[i].TransactionTimeUtc > ToDate.ToUniversalTime())
                 {

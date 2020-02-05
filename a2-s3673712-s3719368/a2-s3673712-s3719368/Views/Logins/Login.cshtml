@@ -9,7 +9,7 @@
         <form asp-action="Login">
             <div class="form-group">
                 <label asp-for="LoginID" class="control-label"></label>
-                <input asp-for="LoginID" class="form-control" />
+                <input asp-for="LoginID" class="form-control" value="@ViewBag.LoginID"/>
                 <span asp-validation-for="LoginID" class="text-danger"></span>
             </div>
             <div class="form-group">
