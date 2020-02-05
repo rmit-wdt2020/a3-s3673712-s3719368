@@ -63,7 +63,10 @@ namespace a2_s3673712_s3719368
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-
+            
+            //set up a middleware to handle the request in the pipeline
+            app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
+            
             app.UseRouting();
 
             app.UseAuthorization();
