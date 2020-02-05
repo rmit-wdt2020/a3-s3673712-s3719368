@@ -7,13 +7,29 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <label for="Account" class="control-label">Select Account: </label>
-        <select id="Account" name="Account" class="form-control" data-val="true">
-            @foreach (var account in Model)
-            {
+        <form asp-action="Transfer">
+            <label for="Account" class="control-label">Select Account: </label>
+            <select id="Account" name="Account" class="form-control" data-val="true">
+                @foreach (var account in Model)
+                {
 
-                <option value="@account.AccountNumber" data-val="true">@account.AccountNumber</option>
-            }
-        </select>
+                    <option value="@account.AccountNumber" data-val="true">@account.AccountNumber</option>
+                }
+            </select>
+            <label for="FromDate" class="control-label">From Date: </label>
+            <input id="FromDate" name="FromDate" type="datetime-local" class="form-control" data-val="true"
+                   data-val-required="The Amount field is required." />
+            <label for="ToDate" class="control-label">To Date: </label>
+            <input id="ToDate" name="ToDate" type="datetime-local" class="form-control" data-val="true"
+                   data-val-required="The Amount field is required." />
+            <div class="form-group">
+                <input type="submit" value="Transfer" class="btn btn-primary" />
+                <a class="btn btn-primary" onclick="cancel()" style="color:white">Cancel Transfer</a>
+            </div>
+        </form>
     </div>
 </div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

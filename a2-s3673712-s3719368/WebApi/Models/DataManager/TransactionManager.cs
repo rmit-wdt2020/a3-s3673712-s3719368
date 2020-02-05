@@ -19,15 +19,14 @@ namespace WebApi.Models.DataManager
             _context = context;
         }
 
-        public Transaction Get(int id)
+        public Transaction Get(int id)//get by accountnumber
         {
-            return _context.Transactions.Find(id);
+            return _context.Transactions.Where(e => e.AccountNumber == id).FirstOrDefault();
         }
 
         public IEnumerable<Transaction> GetAll()
         {
-            //  return _context.Transactions.Include(a => a.AccountNumber).ThenInclude(a => a.de).ToList();
-            return null;
+            return _context.Transactions.Include(e => e.DestinationAccount).ThenInclude(e => e.AccountNumber).ToList();
         }
 
         public int Add(Transaction transaction)

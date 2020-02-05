@@ -12,7 +12,14 @@ namespace a2_s3673712_s3719368.Controllers
     {
         public IActionResult Login()
         {
-            return View();
+            if (HttpContext.Session.GetString("Admin") != null)
+            {
+                return RedirectToAction("Index", "CustomerMange");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         [HttpPost]
