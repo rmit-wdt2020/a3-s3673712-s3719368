@@ -34,8 +34,31 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> SelectTransaction(int? Account,DateTime FromDate, DateTime ToDate) 
         {
-            AccountDto account = await accountManger.GetAccount(Account);
-            IEnumerable<TransactionDto> transactions = await transactionManager.GetTransaction(Account);
+            IEnumerable<TransactionDto> transactions;
+            if (ToDate > DateTime.UtcNow || FromDate > ToDate || FromDate > DateTime.UtcNow) 
+            {
+                ModelState.AddModelError("DateFailed", "Date Invalid.");
+            }
+
+            if (Account == 0)
+            {
+                transactions = await transactionManager.GetAllTransaction();
+            }
+            else {
+                transactions = await transactionManager.GetTransaction(Account);
+            }
+
+            if (transactions == null) 
+            {
+                ModelState.AddModelError("DateFailed", "No transaction between these dates.");
+            }
+
+            if (!ModelState.IsValid) 
+            {
+                IEnumerable<AccountDto> accounts = await accountManger.GetAllAccounts();
+                return View(accounts);
+            }
+
             IEnumerable<TransactionDto> needed = transactionManager.FliterByDate(transactions, FromDate, ToDate);
             return View(nameof(List), needed);
         }

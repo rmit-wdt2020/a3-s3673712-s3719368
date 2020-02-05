@@ -1,4 +1,5 @@
 ﻿using a2_s3673712_s3719368.Area.Admin.Models;
+using a2_s3673712_s3719368.Exceptions;
 using a2_s3673712_s3719368.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -39,7 +40,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             var response = await client.GetAsync($"api/Customers/{id}");
 
             if (!response.IsSuccessStatusCode)
-                throw new Exception();
+                throw new ItemNotFoundExcpetion("Status Failed");
 
             var result = response.Content.ReadAsStringAsync().Result;
             var customer = JsonConvert.DeserializeObject<CustomerDto>(result);
