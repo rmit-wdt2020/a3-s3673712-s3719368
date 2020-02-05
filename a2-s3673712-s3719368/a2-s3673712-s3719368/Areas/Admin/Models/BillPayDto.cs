@@ -31,6 +31,6 @@ namespace a2_s3673712_s3719368.Areas.Admin.Models
         [Required]
         public DateTime ModifyDate { get; set; }
 
-
+        public bool Block { get; set; }
     }
 }

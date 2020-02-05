@@ -38,6 +38,6 @@ namespace WebApi.Models
         [Required]
         public DateTime ModifyDate { get; set; }
 
-
+        public bool Block { get; set; }
     }
 }

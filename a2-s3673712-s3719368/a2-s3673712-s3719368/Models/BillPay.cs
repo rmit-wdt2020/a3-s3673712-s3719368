@@ -37,6 +37,8 @@ namespace a2_s3673712_s3719368.Models
         [Required]
         public DateTime ModifyDate { get; set; }
 
+        public bool Block { get; set; }
+
 
     }
 }
