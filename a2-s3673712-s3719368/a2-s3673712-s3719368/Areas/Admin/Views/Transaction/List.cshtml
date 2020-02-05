@@ -1,0 +1,62 @@
+﻿@model IEnumerable<a2_s3673712_s3719368.Areas.Admin.Models.TransactionDto>
+
+@{
+    ViewData["Title"] = "Transaction List";
+}
+
+<h1>Transaction List</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinationAccount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransactionTimeUtc)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransactionType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationAccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransactionTimeUtc)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TransactionID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.TransactionID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.TransactionID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

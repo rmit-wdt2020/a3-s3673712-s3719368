@@ -41,8 +41,6 @@ namespace WebApi
             services.AddDbContext<NationBankContext>(options => //add connection string
             {
                 options.UseSqlServer(Configuration.GetConnectionString(nameof(NationBankContext)));
-                // Enable lazy loading.
-              //  options.UseLazyLoadingProxies();
             });
         }
 

@@ -1,4 +1,5 @@
-﻿using a2_s3673712_s3719368.Models;
+﻿using a2_s3673712_s3719368.Areas.Admin.Models;
+using a2_s3673712_s3719368.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,5 +27,7 @@ namespace a2_s3673712_s3719368.Area.Admin.Models
 
         [Required]
         public DateTime ModifyDate { get; set; }
+
+        public virtual List<TransactionDto> Transactions { get; set; }
     }
 }

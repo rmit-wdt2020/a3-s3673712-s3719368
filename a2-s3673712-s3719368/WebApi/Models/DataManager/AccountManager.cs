@@ -22,7 +22,7 @@ namespace BankAPI.Models.DataManager
 
         public Account Get(int id)
         {
-            return _context.Accounts.Find(id);
+            return _context.Accounts.Include(c => c.Transactions).Include(e => e.BillPays).FirstOrDefault(e=> e.AccountNumber == id);
         }
 
         public IEnumerable<Account> GetAll()

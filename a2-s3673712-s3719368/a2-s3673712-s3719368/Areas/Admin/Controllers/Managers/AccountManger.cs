@@ -29,5 +29,20 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
 
             return accounts;
         }
+
+        public async Task<AccountDto> GetAccount(int? id)
+        {
+            if (id == null)
+                return null;
+
+            var response = await client.GetAsync($"api/Accounts/{id}");
+            if (!response.IsSuccessStatusCode)
+                throw new Exception();
+
+            var result = response.Content.ReadAsStringAsync().Result;
+            var account = JsonConvert.DeserializeObject<AccountDto>(result);
+
+            return account;
+        }
     }
 }

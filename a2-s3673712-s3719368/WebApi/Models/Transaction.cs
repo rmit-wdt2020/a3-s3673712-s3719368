@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace WebApi.Models
@@ -26,6 +28,7 @@ namespace WebApi.Models
 
         [Required]
         public int AccountNumber { get; set; }
+    
         public virtual Account Account { get; set; }
 
         [ForeignKey("DestinationAccount")]

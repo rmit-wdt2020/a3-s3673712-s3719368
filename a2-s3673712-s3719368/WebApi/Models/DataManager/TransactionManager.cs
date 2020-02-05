@@ -21,12 +21,12 @@ namespace WebApi.Models.DataManager
 
         public Transaction Get(int id)//get by accountnumber
         {
-            return _context.Transactions.Where(e => e.AccountNumber == id).FirstOrDefault();
+            return _context.Transactions.Include(e => e.DestinationAccount).FirstOrDefault(e=> e.TransactionID == id);
         }
 
         public IEnumerable<Transaction> GetAll()
         {
-            return _context.Transactions.Include(e => e.DestinationAccount).ThenInclude(e => e.AccountNumber).ToList();
+            return _context.Transactions.Include(e => e.DestinationAccount).ToList();
         }
 
         public int Add(Transaction transaction)

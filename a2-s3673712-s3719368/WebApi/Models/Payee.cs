@@ -29,6 +29,6 @@ namespace WebApi.Models
         [Required, RegularExpression(@"^[61][0-9]{8}$",
          ErrorMessage = "Wrong number format.")]
         public string Phone { get; set; }
-        public BillPay BillPay { get; set; }
+        public virtual BillPay BillPay { get; set; }
     }
 }

@@ -35,9 +35,5 @@ namespace WebApi.Data
          
         }
 
-        internal Account FindAsync(int? id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
