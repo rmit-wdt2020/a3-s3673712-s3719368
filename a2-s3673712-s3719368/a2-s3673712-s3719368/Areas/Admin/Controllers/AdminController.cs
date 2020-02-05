@@ -40,11 +40,11 @@ namespace a2_s3673712_s3719368.Controllers
             return RedirectToAction("Index", "CustomersMange");
         }
 
-        [Route("LogoutNow")]
+       
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Admin");
         }
     }
 }

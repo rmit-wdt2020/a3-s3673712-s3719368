@@ -78,7 +78,7 @@ namespace a2_s3673712_s3719368.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Logins");
         }
 
 
