@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
 {
-    public class LoginManger
+    public class LoginManager
     {
         private HttpClient client;
-        public LoginManger()
+        public LoginManager()
         {
             client = WebApi.InitializeClient();
         }

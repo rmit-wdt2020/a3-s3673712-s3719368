@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using a2_s3673712_s3719368.Data;
-using a2_s3673712_s3719368.Models;
-using a2_s3673712_s3719368.Area.Admin.Models;
+using a2_s3673712_s3719368.Areas.Admin.Models;
 using Newtonsoft.Json;
 using a2_s3673712_s3719368.Areas.Admin.Controllers.Managers;
 using a2_s3673712_s3719368.Attributes;
@@ -15,15 +11,15 @@ using a2_s3673712_s3719368.Attributes;
 namespace a2_s3673712_s3719368.Controllers
 {
     [AuthorizeAdmin]
-    public class CustomersMangeController : Controller
+    public class CustomersManagercontroller : Controller
     {
-        private CustomerManger customerManger;
-        private LoginManger loginManger;
+        private CustomerManager customerManger;
+        private LoginManager loginManger;
 
-        public CustomersMangeController(NationBankContext context)
+        public CustomersManagercontroller()
         {
-            customerManger = new CustomerManger();
-            loginManger = new LoginManger();
+            customerManger = new CustomerManager();
+            loginManger = new LoginManager();
         }
 
         // GET: CustomersMange

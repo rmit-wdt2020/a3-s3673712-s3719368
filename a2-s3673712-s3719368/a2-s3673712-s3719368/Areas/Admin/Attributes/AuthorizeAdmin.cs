@@ -13,7 +13,7 @@ namespace a2_s3673712_s3719368.Attributes
             var Admin = context.HttpContext.Session.GetString("Admin");
             if (Admin == null)
             {
-                context.Result = new RedirectToActionResult("Login", "Admin", null);
+                context.Result = new RedirectToActionResult("Error", "Admin", null);
             }
         }
 

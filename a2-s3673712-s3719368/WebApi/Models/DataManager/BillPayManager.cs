@@ -25,7 +25,7 @@ namespace WebApi.Models.DataManager
 
         public IEnumerable<BillPay> GetAll()
         {
-            return _context.BillPays.Include(a => a.AccountNumber).ToList();
+            return _context.BillPays.Include(a => a.Account).Include(p => p.Payee).ToList();
         }
 
         public int Add(BillPay bill)

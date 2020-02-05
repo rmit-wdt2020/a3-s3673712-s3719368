@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace a2_s3673712_s3719368.Areas.Admin.Models
 {
-    public class CustomerDto
+
+    public class PayeeDto
     {
-        public int CustomerID { get; set; }
+        [Required]
+        public int PayeeID { get; set; }
 
-        [Required, StringLength(50)]
-        public string Name { get; set; }
+        [Required]
+        public string PayeeName { get; set; }
 
-        [StringLength(11)]
-        public string TFN { get; set; }
 
         [StringLength(50)]
         public string Address { get; set; }
@@ -28,10 +26,8 @@ namespace a2_s3673712_s3719368.Areas.Admin.Models
         [StringLength(3)]
         public string State { get; set; }
 
-        [Required, RegularExpression(@"^[61][0-9]{9}$",
+        [Required, RegularExpression(@"^[61][0-9]{8}$",
          ErrorMessage = "Wrong number format.")]
         public string Phone { get; set; }
-
-        public virtual List<AccountDto> Accounts { get; set; }
     }
 }

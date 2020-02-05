@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace a2_s3673712_s3719368.Area.Admin.Models
+namespace a2_s3673712_s3719368.Areas.Admin.Models
 {
     public class AccountDto
     {

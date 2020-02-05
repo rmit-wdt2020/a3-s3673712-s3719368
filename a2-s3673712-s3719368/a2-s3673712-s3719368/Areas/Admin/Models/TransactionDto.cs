@@ -1,4 +1,4 @@
-﻿using a2_s3673712_s3719368.Area.Admin.Models;
+﻿using a2_s3673712_s3719368.Areas.Admin.Models;
 using a2_s3673712_s3719368.Models;
 using System;
 using System.Collections.Generic;

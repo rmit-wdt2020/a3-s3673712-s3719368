@@ -26,6 +26,8 @@ namespace WebApi.Models
         [Column(TypeName = "money"),Required]
         public decimal Amount { get; set; }
 
+
+        public bool Status { get; set; }
         [Required]
         public DateTime ScheduleDate { get; set; }
 

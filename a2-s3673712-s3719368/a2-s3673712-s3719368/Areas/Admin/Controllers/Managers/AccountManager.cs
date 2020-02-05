@@ -1,18 +1,17 @@
-﻿using a2_s3673712_s3719368.Area.Admin.Models;
+﻿using a2_s3673712_s3719368.Areas.Admin.Models;
 using a2_s3673712_s3719368.Exceptions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
 {
-    public class AccountManger
+    public class AccountManager
     {
         private HttpClient client;
-        public AccountManger()
+        public AccountManager()
         {
             client = WebApi.InitializeClient();
         }

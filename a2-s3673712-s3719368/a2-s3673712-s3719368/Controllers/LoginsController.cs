@@ -38,12 +38,18 @@ namespace a2_s3673712_s3719368.Controllers
         public async Task<IActionResult> Login(string loginID, string password)
         {
             var login = await _context.Logins.FindAsync(loginID);
-            if (login.Lock == true) 
+
+            //Validation
+            if (login == null) {
+                ModelState.AddModelError("LoginFailed", "Login failed, please try again.");
+                return View(new Login { LoginID = loginID });
+            }
+            if (login.Lock == true)
             {
                 ModelState.AddModelError("LoginFailed", "Account is being locked, please try again after 1 min");
             }
-            //Validation
-            if (login == null || !PBKDF2.Verify(login.PasswordHash, password))
+            
+            if (!PBKDF2.Verify(login.PasswordHash, password))
             {
                 ModelState.AddModelError("LoginFailed", "Login failed, please try again.");
                 login.attempt += 1;
@@ -56,7 +62,7 @@ namespace a2_s3673712_s3719368.Controllers
                 await _context.SaveChangesAsync();
                 return View(new Login { LoginID = loginID });
             }
-
+         
             if (!ModelState.IsValid)
             {
                 ViewBag.LoginID = loginID;

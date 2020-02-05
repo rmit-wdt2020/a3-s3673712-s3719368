@@ -1,4 +1,4 @@
-﻿using a2_s3673712_s3719368.Area.Admin.Models;
+﻿using a2_s3673712_s3719368.Areas.Admin.Models;
 using a2_s3673712_s3719368.Exceptions;
 using a2_s3673712_s3719368.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
 {
-    public class CustomerManger
+    public class CustomerManager
     {
         private HttpClient client;
-        public CustomerManger() {
+        public CustomerManager() {
             client = WebApi.InitializeClient();
         }
 
