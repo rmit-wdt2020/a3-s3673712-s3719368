@@ -84,7 +84,7 @@ namespace a2_s3673712_s3719368
                 endpoints.MapAreaControllerRoute(
                "admin",
                "admin",
-                pattern: "{controller=Admin}/{action=Login}/{id?}");
+                pattern: "{controller=Admin}/{action=AdminLogin}/{id?}");
 
                 endpoints.MapControllerRoute(
                 name: "default",
