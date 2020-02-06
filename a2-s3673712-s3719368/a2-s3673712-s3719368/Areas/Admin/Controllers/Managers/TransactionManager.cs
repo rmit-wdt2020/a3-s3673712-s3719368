@@ -1,5 +1,6 @@
 ﻿using a2_s3673712_s3719368.Areas.Admin.Models;
 using a2_s3673712_s3719368.Exceptions;
+using a2_s3673712_s3719368.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -98,6 +99,22 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             return data;
         }
 
+        public string GetFrequnceyBetweenMonth(IEnumerable<TransactionDto> transactions, DateTime FromDate, DateTime ToDate) 
+        {
+            string data = "";
+            List<TransactionDto> transactionArray = transactions.ToList();
+            List<int> Months = new List<int>();
+            for (int i = FromDate.Month; i <= ToDate.Month; i++)
+            {
+                Months.Add(i); //add month as group
+            }
+            foreach (int month in Months)
+            {
+                data += GetFrequnceyMonthTotal(month, transactions).ToString() + ",";
+            }
+            return data;
+        }
+
         public decimal GetMonthsTotal(int Month, IEnumerable<TransactionDto> transactions) 
         {
             decimal total = 0;
@@ -112,11 +129,52 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             return total;
         }
 
-  /*      public string GetAmountBetweenDateOf(IEnumerable<TransactionDto> transactions, DateTime FromDate, DateTime ToDate) 
+        public int GetFrequnceyMonthTotal(int Month, IEnumerable<TransactionDto> transactions) 
         {
-            
+            int total = 0;
+            foreach (TransactionDto item in transactions)
+            {
+                if (item.TransactionTimeUtc.Month == Month)
+                {
+                    total ++;
+                }
+            }
+
+            return total;
         }
-        */
+
+        public string GetTrasnactionTypeList() 
+        {
+            string list = "";
+            foreach (string typeString in Enum.GetNames(typeof(TransactionType))) 
+            {
+                list += "'" + typeString + "',";
+            }
+            return list;
+        }
+
+        public string GetTransactionTypeData(IEnumerable<TransactionDto> transactions)
+        {
+            string result = "";
+            foreach (string typeString in Enum.GetNames(typeof(TransactionType)))
+            {
+                result += GetTransactionTypeCount(typeString,transactions) +",";
+            }
+            return result;
+        }
+
+        public int GetTransactionTypeCount(string type, IEnumerable<TransactionDto> transactions) 
+        {
+            int count = 0;
+            foreach (TransactionDto transaction in transactions) 
+            {
+                if (transaction.TransactionType.ToString() == type) 
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
 
     }
 }
