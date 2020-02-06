@@ -90,7 +90,7 @@ namespace a2_s3673712_s3719368.LogicManger
             }
             else 
             {
-                bill.Amount += bill.Amount; //if not enough balance this time, double the payment for next period
+                bill.Block = true; //if not enough balance, block the bill
             }
             // Period cases
             switch(bill.Period)
