@@ -17,8 +17,39 @@ a {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+.inputbox {
+    width: 400px !important;
+    max-width: 500px !important;
+    border-radius: 10px !important;
+}
+.loginbox {
+    background: white;
+    border-radius: 15px 15px 15px 15px;
+    text-align: center;
+    border: #E1E1E1 1px solid;
+    margin-top: 60px;
+    padding: 15px 0px;
+    width:450px;
 
-
+}
+.background {
+    background: url(../bg.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+#mastheadImage {
+    padding-right: 15px;
+    border-right: 1px solid #C5C5C5;
+}
+.mast-title {
+    vertical-align: middle;
+    margin-left: 15px;
+    color: #000a4A;
+    font-family: "Helvetica Neue Thin", "Helvetica Neue", Helvetica, Arial, san-serif;
+    font-size: 22px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    display: inline;
+}
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
