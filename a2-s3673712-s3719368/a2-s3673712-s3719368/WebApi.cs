@@ -9,7 +9,8 @@ namespace a2_s3673712_s3719368
 {
     public class WebApi
     {
-        private const string ApiBaseUri = "https://localhost:44325/";
+        private const string ApiBaseUri = "http://localhost:53930";
+
         public static HttpClient InitializeClient()
         {
             var client = new HttpClient { BaseAddress = new Uri(ApiBaseUri) };

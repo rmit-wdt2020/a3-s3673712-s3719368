@@ -1,0 +1,71 @@
+﻿@model a2_s3673712_s3719368.Areas.Admin.Models.LoginDto
+@{
+    ViewData["Title"] = "Lock";
+}
+
+<h1>Lock</h1>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LoginID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LoginID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PasswordHash)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PasswordHash)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ModifyDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ModifyDate)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Lock)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Lock)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LockDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LockDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.attempt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.attempt)
+        </dd>
+    </dl>
+
+    <form asp-action="Lock">
+        <input type="hidden" asp-for="CustomerID" />
+        <input type="submit" value="Lock/Unlock" class="btn btn-danger" />
+    </form>
+
+
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

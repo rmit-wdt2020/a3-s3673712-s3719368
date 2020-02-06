@@ -6,11 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Data;
 using WebApi.Models;
 
 namespace BankAPI.Models.DataManager
 {
-    public class AccountManager : IDataRepository<Accounts, int>
+    public class AccountManager : IDataRepository<Account, int>
     {
         private readonly NationBankContext _context;
 
@@ -19,22 +20,22 @@ namespace BankAPI.Models.DataManager
             _context = context;
         }
 
-        public Accounts Get(int id)
+        public Account Get(int id)
         {
-            return _context.Accounts.Find(id);
+            return _context.Accounts.Include(c => c.Transactions).Include(e => e.BillPays).FirstOrDefault(e=> e.AccountNumber == id);
         }
 
-        public IEnumerable<Accounts> GetAll()
+        public IEnumerable<Account> GetAll()
         {
-            return _context.Accounts.Include(c => c.Customer).ToList();
+            return _context.Accounts.Include(c => c.Transactions).Include(e => e.BillPays).ToList();
         }
 
-        public int Add(Accounts account)
+        public int Add(Account account)
         {
             _context.Accounts.Add(account);
             _context.SaveChanges();
 
-            return account.CustomerId;
+            return account.CustomerID;
         }
 
         public int Delete(int id)
@@ -45,7 +46,7 @@ namespace BankAPI.Models.DataManager
             return id;
         }
 
-        public int Update(int id, Accounts account)
+        public int Update(int id, Account account)
         {
             _context.Update(account);
             _context.SaveChanges();

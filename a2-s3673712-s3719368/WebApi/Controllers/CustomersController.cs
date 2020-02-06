@@ -24,30 +24,30 @@ namespace BankAPI.Controllers
 
         // GET: api/movies
         [HttpGet]
-        public IEnumerable<Customers> Get()
+        public IEnumerable<Customer> Get()
         {
             return _repo.GetAll();
         }
 
         // GET api/movies/1
         [HttpGet("{id}")]
-        public Customers Get(int id)
+        public Customer Get(int id)
         {
             return _repo.Get(id);
         }
 
         // POST api/movies
         [HttpPost]
-        public void Post([FromBody] Customers customer)
+        public void Post([FromBody] Customer customer)
         {
             _repo.Add(customer);
         }
 
         // PUT api/movies
         [HttpPut]
-        public void Put([FromBody] Customers customer)
+        public void Put([FromBody] Customer customer)
         {
-            _repo.Update(customer.CustomerId, customer);
+            _repo.Update(customer.CustomerID, customer);
         }
 
         // DELETE api/movies/1

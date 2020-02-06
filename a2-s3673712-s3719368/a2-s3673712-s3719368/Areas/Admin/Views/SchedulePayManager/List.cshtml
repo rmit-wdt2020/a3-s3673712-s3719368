@@ -1,0 +1,83 @@
+﻿@model IEnumerable<a2_s3673712_s3719368.Areas.Admin.Models.BillPayDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Schedule BillPay Management</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayeeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScheduleDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Period)
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifyDate)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduleDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Period)
+            </td>
+            <td>
+                @if (!item.Block)
+                {
+                    <a>Active</a>
+                }
+                else
+                {
+                    <a>Blocked</a>} 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifyDate)
+            </td>
+
+            <td>
+
+                <form asp-action="Block" asp-route-id="@item.BillPayID">
+
+                    <input type="submit" value="Block">
+                </form>
+                <form asp-action="Unblock" asp-route-id="@item.BillPayID">
+
+                    <input type="submit" value="Unblock">
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

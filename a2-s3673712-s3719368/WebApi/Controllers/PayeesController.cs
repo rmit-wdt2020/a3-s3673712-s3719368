@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using a2_s3673712_s3719368.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models;
@@ -22,30 +23,30 @@ namespace WebApi.Controllers
 
         // GET: api/movies
         [HttpGet]
-        public IEnumerable<Payees> Get()
+        public IEnumerable<Payee> Get()
         {
             return _repo.GetAll();
         }
 
         // GET api/movies/1
         [HttpGet("{id}")]
-        public Payees Get(int id)
+        public Payee Get(int id)
         {
             return _repo.Get(id);
         }
 
         // POST api/movies
         [HttpPost]
-        public void Post([FromBody] Payees payee)
+        public void Post([FromBody] Payee payee)
         {
             _repo.Add(payee);
         }
 
         // PUT api/movies
         [HttpPut]
-        public void Put([FromBody] Payees payee)
+        public void Put([FromBody] Payee payee)
         {
-            _repo.Update(payee.PayeeId, payee);
+            _repo.Update(payee.PayeeID, payee);
         }
 
         // DELETE api/movies/1

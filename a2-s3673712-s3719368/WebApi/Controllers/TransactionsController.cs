@@ -1,6 +1,7 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
-using System.Transactions;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models;
@@ -20,30 +21,30 @@ namespace WebApi.Controllers
 
         // GET: api/movies
         [HttpGet]
-        public IEnumerable<Transactions> Get()
+        public IEnumerable<Transaction> Get()
         {
             return _repo.GetAll();
         }
 
         // GET api/movies/1
         [HttpGet("{id}")]
-        public Transactions Get(int id)
+        public Transaction Get(int id)
         {
             return _repo.Get(id);
         }
 
         // POST api/movies
         [HttpPost]
-        public void Post([FromBody] Transactions transaction)
+        public void Post([FromBody] Transaction transaction)
         {
             _repo.Add(transaction);
         }
 
         // PUT api/movies
         [HttpPut]
-        public void Put([FromBody] Transactions transaction)
+        public void Put([FromBody] Transaction transaction)
         {
-            _repo.Update(transaction.TransactionId, transaction);
+            _repo.Update(transaction.TransactionID, transaction);
         }
 
         // DELETE api/movies/1
