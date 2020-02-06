@@ -33,50 +33,52 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @for (int i = 0; i < Model.Count(); i++) 
         {
-            
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccountNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PayeeID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScheduleDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Period)
-            </td>
-            <td>
-                @if (!item.Block)
-                {
-                    <a>Active</a>
-                }
-                else
-                {
-                    <a>Blocked</a>} 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ModifyDate)
-            </td>
+            var item = Model.ElementAt(i);
+            var customSwitchID = "toggle_" + i;
+            var customFormID = "Form_" + i;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayeeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScheduleDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Period)
+                </td>
+                <td>
+                    @if (!item.Block)
+                    {
+                        <a>Unblocked</a>
+                    }
+                    else
+                    {
+                        <a>Blocked</a>}
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModifyDate)
+                </td>
 
-            <td>
+                <td>
 
-                <form asp-action="Block" asp-route-id="@item.BillPayID">
+                    <form asp-action="ChangeStatus" asp-route-id="@item.BillPayID" id="@customFormID">
+                        <div class="custom-control custom-switch" onclick="checkChanged('@customSwitchID', '@customFormID')">
+                            <input type="checkbox" class="custom-control-input" id="@customSwitchID" name="status" checked="@(item.Block)">
+                            <label class="custom-control-label" for="customSwitch1">Toggle on to Block</label>
+                        </div>
+                    </form>
+                
+                </td>
+            </tr>
 
-                    <input type="submit" value="Block">
-                </form>
-                <form asp-action="Unblock" asp-route-id="@item.BillPayID">
-
-                    <input type="submit" value="Unblock">
-                </form>
-            </td>
-        </tr>
         }
     </tbody>
 </table>
