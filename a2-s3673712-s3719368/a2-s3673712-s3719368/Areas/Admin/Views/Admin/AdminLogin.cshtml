@@ -8,7 +8,7 @@
     <div class="col-md-4" style="margin-left:30%; width:auto;">
         <h2>Admin Portal Login</h2>
         <hr />
-        <form asp-action="Login">
+        <form asp-action="AdminLogin" asp-area="admin">
             <div class="form-group">
                 <label for="LoginID" class="control-label">Username</label>
                 <input id="LoginID" name="LoginID" class="form-control" value="@ViewBag.LoginID" />

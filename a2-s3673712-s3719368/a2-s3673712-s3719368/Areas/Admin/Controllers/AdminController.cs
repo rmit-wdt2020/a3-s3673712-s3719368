@@ -13,7 +13,7 @@ namespace a2_s3673712_s3719368.Controllers
     [Area("admin")]
     public class AdminController : Controller
     {
-        public IActionResult Login()
+        public IActionResult AdminLogin()
         {
             if (HttpContext.Session.GetString("Admin") != null)
             {
@@ -26,7 +26,7 @@ namespace a2_s3673712_s3719368.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(string LoginID, string password)
+        public IActionResult AdminLogin(string LoginID, string password)
         {
             if (!(LoginID == "admin" && password == "admin")) 
             {
@@ -43,11 +43,10 @@ namespace a2_s3673712_s3719368.Controllers
             return RedirectToAction("Index", "CustomersManager");
         }
 
-       
-        public IActionResult Logout()
+        public IActionResult AdminLogout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Login", "Admin");
+            return RedirectToAction("AdminLogin", "Admin");
         }
         //Go to Error page if not log in
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
