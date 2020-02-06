@@ -24,7 +24,9 @@
             //throw new HttpResponseMessage(HttpStatusCode.NotModified);
     }
 }
-<div class="jumbotron">
-    <h1>Error @Model</h1>
-    <h3>@statusmessage</h3>
-</div>
+    <body style="background: url(../css/img/Error.png) no-repeat center center fixed; background-size: cover;">
+        <div style="position: fixed; left: 600px; top:250px">
+            <h1 style="font-size:60px; color:red">Error @Model</h1>
+            <h3 style="font-size:40px; font-style: italic;">@statusmessage</h3>
+        </div>
+    </body>
