@@ -11,12 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200125142837_ChangePayee.cs" />
-    <Compile Remove="Migrations\20200125142837_ChangePayee.Designer.cs" />
-    <Compile Remove="Migrations\20200204061259_relationUpdate.cs" />
-    <Compile Remove="Migrations\20200204061259_relationUpdate.Designer.cs" />
-    <Compile Remove="Migrations\20200204061554_relationUpdated.cs" />
-    <Compile Remove="Migrations\20200204061554_relationUpdated.Designer.cs" />
+    <Compile Remove="Areas\Default\Migrations\20200125142837_ChangePayee.cs" />
+    <Compile Remove="Areas\Default\Migrations\20200125142837_ChangePayee.Designer.cs" />
+    <Compile Remove="Areas\Default\Migrations\20200204061259_relationUpdate.cs" />
+    <Compile Remove="Areas\Default\Migrations\20200204061259_relationUpdate.Designer.cs" />
+    <Compile Remove="Areas\Default\Migrations\20200204061554_relationUpdated.cs" />
+    <Compile Remove="Areas\Default\Migrations\20200204061554_relationUpdated.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

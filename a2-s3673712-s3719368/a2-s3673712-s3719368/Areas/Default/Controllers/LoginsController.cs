@@ -10,7 +10,7 @@ using System;
 
 namespace a2_s3673712_s3719368.Controllers
 {
-
+    [Area("default")]
     [Route("Bank/SecureLogin")]
     public class LoginsController : Controller
     {

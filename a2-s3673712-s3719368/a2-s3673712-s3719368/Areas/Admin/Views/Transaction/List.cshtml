@@ -4,6 +4,8 @@
     ViewData["Title"] = "Transaction List";
 }
 <h1>Transaction List</h1>
+
+<br>
 <table class="table">
     <thead>
         <tr>
@@ -25,7 +27,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.TransactionTimeUtc)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -50,12 +51,48 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.TransactionTimeUtc)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.TransactionID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.TransactionID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.TransactionID">Delete</a>
-                </td>
             </tr>
         }
     </tbody>
 </table>
+<div style="text-align: center">
+    <canvas id="barcanvas"></canvas>
+</div>
+
+<script>
+        
+var ctx = document.getElementById('barcanvas').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    title:  
+      {  
+       display: true,  
+       text: "Total Money of Transaction in Months"  
+      },  
+    data: {
+        labels: [@Html.Raw(ViewBag.MonthsLabel)],
+        datasets: [{
+            label: '# of dollar Transactions',
+            data: [@ViewBag.Data],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>  

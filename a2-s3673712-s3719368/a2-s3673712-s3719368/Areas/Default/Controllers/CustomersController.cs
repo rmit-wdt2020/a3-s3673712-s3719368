@@ -11,7 +11,7 @@ using X.PagedList;
 
 namespace a2_s3673712_s3719368.Controllers
 {
-  
+    [Area("default")]
     [AuthorizeCustomer]
     public class CustomersController : Controller
     {

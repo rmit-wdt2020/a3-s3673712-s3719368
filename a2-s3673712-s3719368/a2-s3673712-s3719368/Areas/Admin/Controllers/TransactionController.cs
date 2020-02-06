@@ -5,9 +5,11 @@ using a2_s3673712_s3719368.Areas.Admin.Models;
 using a2_s3673712_s3719368.Areas.Admin.Controllers.Managers;
 using a2_s3673712_s3719368.Attributes;
 using Microsoft.AspNetCore.Mvc;
+using a2_s3673712_s3719368.Models;
 
 namespace a2_s3673712_s3719368.Areas.Admin.Controllers
 {
+    [Area("admin")]
     [AuthorizeAdmin]
     public class TransactionController : Controller
     {
@@ -58,9 +60,14 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers
             }
 
             IEnumerable<TransactionDto> needed = transactionManager.FliterByDate(transactions, FromDate, ToDate);
+
+            ViewBag.MonthsLabel = transactionManager.GetTimePeriodOfTransaction(FromDate,ToDate);
+            
+            ViewBag.Data = transactionManager.GetDataBetweenMonth(transactions, FromDate, ToDate);
             return View(nameof(List), needed);
         }
 
+        
         public IActionResult List()
         {
             return View();

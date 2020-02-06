@@ -10,13 +10,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace a2_s3673712_s3719368.Controllers
 {
+    [Area("admin")]
     public class AdminController : Controller
     {
         public IActionResult Login()
         {
             if (HttpContext.Session.GetString("Admin") != null)
             {
-                return RedirectToAction("Index", "CustomerMange");
+                return RedirectToAction("Index", "CustomersManager");
             }
             else
             {

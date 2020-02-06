@@ -3,6 +3,7 @@ using a2_s3673712_s3719368.Exceptions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -44,7 +45,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
 
             var result = response.Content.ReadAsStringAsync().Result;
             AccountDto account = JsonConvert.DeserializeObject<AccountDto>(result);
-            IEnumerable<TransactionDto> transactions = account.Transactions;
+            IEnumerable<TransactionDto> transactions = account.Transactions.OrderBy(e => e.TransactionTimeUtc);
 
             return transactions;
 
@@ -53,7 +54,9 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
         public IEnumerable<TransactionDto> FliterByDate(IEnumerable<TransactionDto> transactions, DateTime FromDate, DateTime ToDate) 
         {
             List<TransactionDto> transactionArray = transactions.ToList();
-            foreach(TransactionDto item in transactions)
+            if (transactionArray[0].TransactionTimeUtc > FromDate)
+                FromDate = transactionArray[0].TransactionTimeUtc;
+            foreach (TransactionDto item in transactions)
             {
                 if (item.TransactionTimeUtc < FromDate.ToUniversalTime() || item.TransactionTimeUtc > ToDate.ToUniversalTime()) 
                 {
@@ -63,5 +66,57 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
 
             return transactionArray;
         }
+
+        public string GetTimePeriodOfTransaction(DateTime FromDate, DateTime ToDate) 
+        {
+            string period = "";
+
+            for (int i = FromDate.Month; i <= ToDate.Month; i++) 
+            {
+                period += "'" + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i).ToString() + "'" + ",";
+            }
+
+            return period;
+        }
+
+        public string GetDataBetweenMonth(IEnumerable<TransactionDto> transactions, DateTime FromDate, DateTime ToDate) 
+        {
+            string data = "";
+            List<TransactionDto> transactionArray = transactions.ToList();
+            List<int> Months = new List<int>();
+            for (int i = FromDate.Month; i <= ToDate.Month; i++)
+            {
+                Months.Add(i); //add month as group
+            }
+
+
+            foreach (int month in Months) 
+            {
+                data += GetMonthsTotal(month, transactions).ToString() + ",";
+            }
+           
+            return data;
+        }
+
+        public decimal GetMonthsTotal(int Month, IEnumerable<TransactionDto> transactions) 
+        {
+            decimal total = 0;
+            foreach (TransactionDto item in transactions)
+            {
+                if (item.TransactionTimeUtc.Month == Month) 
+                {
+                    total += item.Amount;
+                }
+            }
+
+            return total;
+        }
+
+  /*      public string GetAmountBetweenDateOf(IEnumerable<TransactionDto> transactions, DateTime FromDate, DateTime ToDate) 
+        {
+            
+        }
+        */
+
     }
 }

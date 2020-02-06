@@ -10,6 +10,7 @@ using a2_s3673712_s3719368.Attributes;
 
 namespace a2_s3673712_s3719368.Controllers
 {
+    [Area("admin")]
     [AuthorizeAdmin]
     public class CustomersManagercontroller : Controller
     {

@@ -6,7 +6,7 @@ using a2_s3673712_s3719368.Models;
 
 namespace a2_s3673712_s3719368.Controllers
 {
-    
+    [Area("default")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
