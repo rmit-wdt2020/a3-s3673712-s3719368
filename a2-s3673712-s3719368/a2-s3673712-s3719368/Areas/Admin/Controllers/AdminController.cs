@@ -11,8 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace a2_s3673712_s3719368.Controllers
 {
     [Area("admin")]
+   
     public class AdminController : Controller
     {
+        [Route("Bank/SecureAdminLogin")]
         public IActionResult AdminLogin()
         {
             if (HttpContext.Session.GetString("Admin") != null)
@@ -24,7 +26,7 @@ namespace a2_s3673712_s3719368.Controllers
                 return View();
             }
         }
-
+        [Route("Bank/SecureAdminLogin")]
         [HttpPost]
         public IActionResult AdminLogin(string LoginID, string password)
         {

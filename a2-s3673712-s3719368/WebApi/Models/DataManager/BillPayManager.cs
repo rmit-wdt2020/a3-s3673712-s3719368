@@ -17,10 +17,10 @@ namespace WebApi.Models.DataManager
         {
             _context = context;
         }
-
+     
         public BillPay Get(int id)
         {
-            return _context.BillPays.Find(id);
+            return _context.BillPays.Where(b => b.BillPayID == id).FirstOrDefault();
         }
 
         public IEnumerable<BillPay> GetAll()

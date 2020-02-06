@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h1>Customer information Mangement</h1>
+<h1>Schedule BillPay Management</h1>
 <table class="table">
     <thead>
         <tr>
@@ -23,6 +23,9 @@
                 @Html.DisplayNameFor(model => model.Period)
             </th>
             <th>
+                Status
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ModifyDate)
             </th>
 
@@ -32,34 +35,48 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AccountNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PayeeID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ScheduleDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Period)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModifyDate)
-                </td>
+            
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduleDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Period)
+            </td>
+            <td>
+                @if (!item.Block)
+                {
+                    <a>Active</a>
+                }
+                else
+                {
+                    <a>Blocked</a>} 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifyDate)
+            </td>
 
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.BillPayID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.BillPayID">Details</a> |
-                    <a asp-action="Lock" asp-route-id="@item.BillPayID">Lock</a> |
-                    <a asp-action="Delete" asp-route-id="@item.BillPayID">Delete</a> |
+            <td>
 
-                </td>
-            </tr>
+                <form asp-action="Block" asp-route-id="@item.BillPayID">
+
+                    <input type="submit" value="Block">
+                </form>
+                <form asp-action="Unblock" asp-route-id="@item.BillPayID">
+
+                    <input type="submit" value="Unblock">
+                </form>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

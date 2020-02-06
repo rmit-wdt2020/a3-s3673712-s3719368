@@ -22,5 +22,30 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers
             var bills = await billmanager.GetAllBillPays();
             return View(bills);
         }
+        [HttpPost]
+        public async Task<IActionResult> Block(int? id)
+        {
+            var billpay = await billmanager.GetBillPay(id);
+ 
+            if (billmanager.Block(billpay, true))
+            {
+                return RedirectToAction("List", "SchedulePayManager");
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UnBlock(int? id)
+        {
+            var billpay = await billmanager.GetBillPay(id);
+
+            if (billmanager.Unblock(billpay, false))
+            {
+                return RedirectToAction("List", "SchedulePayManager");
+            }
+
+            return NotFound();
+        }
     }
 }

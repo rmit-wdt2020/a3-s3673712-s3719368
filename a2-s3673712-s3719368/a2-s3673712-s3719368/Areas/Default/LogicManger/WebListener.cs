@@ -45,7 +45,7 @@ namespace a2_s3673712_s3719368.LogicManger
 
                         foreach (BillPay bill in bills) //check due bills.
                         {
-                            if (bill.ScheduleDate.ToString() == DateTime.UtcNow.ToString()) 
+                            if (bill.ScheduleDate.ToString() == DateTime.UtcNow.ToString() && bill.Block == false)
                             {
                                 _logger.LogInformation(
                                           "A bill is due now.");
