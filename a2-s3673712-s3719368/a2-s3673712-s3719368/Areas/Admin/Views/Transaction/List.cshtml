@@ -55,11 +55,21 @@
         }
     </tbody>
 </table>
+<button class="btn btn-primary" onclick="DisplayBarChart()">Display Bar Chart</button>
 <div style="text-align: center">
-    <canvas id="barcanvas"></canvas>
+    <canvas id="barcanvas" style="display:none"></canvas>
 </div>
 
 <script>
+    function DisplayBarChart()
+    {
+        if (document.getElementById('barcanvas').style.display == "none") {
+            document.getElementById('barcanvas').style.display = "block";
+        }else
+        {
+            document.getElementById('barcanvas').style.display = "none";
+        }
+    }
         
 var ctx = document.getElementById('barcanvas').getContext('2d');
 var myChart = new Chart(ctx, {
