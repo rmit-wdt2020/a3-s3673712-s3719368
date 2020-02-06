@@ -58,18 +58,5 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
 
             return false;
         }
-        public bool Unblock(BillPayDto bill, bool status)
-        {
-
-            bill.Block = status;
-            bill.ModifyDate = DateTime.UtcNow;
-
-            var content = new StringContent(JsonConvert.SerializeObject(bill), Encoding.UTF8, "application/json"); //encoding the obj
-            var response = client.PutAsync("api/billpays", content).Result;
-            if (response.IsSuccessStatusCode)
-                return true;
-
-            return false;
-        }
     }
 }
