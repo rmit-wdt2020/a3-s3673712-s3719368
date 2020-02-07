@@ -79,7 +79,11 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
 
             return period;
         }
-        public  IEnumerable<int> MonthsBetween(
+
+        // this following code is modifed from https://stackoverflow.com/questions/11930565/list-the-months-between-two-dates/11930768
+        // Answer from Jodrell
+        // it returns every month in int between two dates
+        public IEnumerable<int> MonthsBetween( 
         DateTime startDate,
         DateTime endDate)
         {
