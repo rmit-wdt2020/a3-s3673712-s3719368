@@ -3,8 +3,13 @@
     ViewData["Title"] = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">Please Log in first.</h2>
-<h3>Redirecting to Login page</h3>
-@* Return to Login page after 3 seconds *@
-<meta http-equiv="Refresh" content="3; url=/Bank/SecureLogin" />
+
+<body style="background: url(../css/img/Error.png) no-repeat center center fixed; background-size: cover;">
+    <div style="position: fixed; left: 600px; top:250px">
+        <h1 class="text-danger">Error.</h1>
+        <h2 class="text-danger">Please Log in first.</h2>
+        <h3>Redirecting to Login page</h3>
+        @* Return to Login page after 3 seconds *@
+        <meta http-equiv="Refresh" content="3; url=/Bank/SecureLogin" />
+    </div>
+</body>
