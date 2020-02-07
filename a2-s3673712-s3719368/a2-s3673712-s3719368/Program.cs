@@ -1,7 +1,9 @@
-//Assignment 2: National Wealth Bank of Australasia ASP.NET Core web app Project
+//Assignment 3: National Wealth Bank of Australasia ASP.NET Core web app Project
 //Authors:    Bach Truong Dao - s3673712
 //            Yongqian Huang  - s3719368
-//Reference:  Lab example, Microsoft ASP.NET tutorial.
+//Reference:  Codes are copied and modified from lecture examples/ lab examples from weeks 4-9
+//Css stylesheet from fontawesome-icon
+//images copied and modified from internet: Error.png and Login_background
 
 
 using System;

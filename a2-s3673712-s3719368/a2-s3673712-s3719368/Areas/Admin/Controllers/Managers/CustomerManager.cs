@@ -58,7 +58,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             return false;
         }
 
-        public bool delete(int id) 
+        public bool Delete(int id) 
         {
             var response = client.DeleteAsync($"api/Customers/{id}").Result;
             if (response.IsSuccessStatusCode)

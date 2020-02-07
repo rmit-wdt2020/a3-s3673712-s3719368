@@ -31,11 +31,10 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers
             if(billpay == null)
                 return NotFound();
 
-            //if ()
-            //{
-            billmanager.Block(billpay, !billpay.Block);
+           
+            billmanager.Block(billpay, !billpay.Block); //Change to true(Block) or false(Unblock) when switch is toogled
             return RedirectToAction("List", "SchedulePayManager");
-            //}
+
             
         }
     }

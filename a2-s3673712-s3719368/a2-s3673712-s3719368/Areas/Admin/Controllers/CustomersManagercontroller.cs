@@ -92,7 +92,7 @@ namespace a2_s3673712_s3719368.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            if (customerManger.delete(id))
+            if (customerManger.Delete(id))
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -121,21 +121,18 @@ namespace a2_s3673712_s3719368.Controllers
         public async Task<IActionResult> Lock(int id,int CustomerID)
         {
             var login = await loginManger.GetLogin(CustomerID);
-            bool status;
-            if (login.Lock == true)
-            {
-                status = false;
-            }
-            else {
-                status = true;
-            }
+    
+            if (login == null)
+                return NotFound();
 
-            if (loginManger.Lock(login, status)) 
-            {
-                return View(login);
-            }
 
-            return NotFound();
+            loginManger.Lock(login, !login.Lock); //Change to true(Lock) or false(Unlock) when button clicked
+
+
+            return View(login);
+            
+
+           
         }
 
 
