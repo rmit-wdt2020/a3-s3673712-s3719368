@@ -85,7 +85,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             string data = "";
             List<TransactionDto> transactionArray = transactions.ToList();
             List<int> Months = new List<int>();
-            for (int i = FromDate.Month; i <= ToDate.Month; i++)
+            for (int i = FromDate.ToUniversalTime().Month; i <= ToDate.ToUniversalTime().Month; i++)
             {
                 Months.Add(i); //add month as group
             }
@@ -104,7 +104,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             string data = "";
             List<TransactionDto> transactionArray = transactions.ToList();
             List<int> Months = new List<int>();
-            for (int i = FromDate.Month; i <= ToDate.Month; i++)
+            for (int i = FromDate.ToUniversalTime().Month; i <= ToDate.ToUniversalTime().Month; i++)
             {
                 Months.Add(i); //add month as group
             }

@@ -35,7 +35,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers
         public async Task<IActionResult> SelectTransaction(int? Account,DateTime FromDate, DateTime ToDate) 
         {
             IEnumerable<TransactionDto> transactions;
-            if (ToDate > DateTime.UtcNow || FromDate > ToDate || FromDate > DateTime.UtcNow) 
+            if (ToDate.ToUniversalTime() > DateTime.UtcNow || FromDate > ToDate || FromDate.ToUniversalTime() > DateTime.UtcNow) 
             {
                 ModelState.AddModelError("DateFailed", "Date Invalid.");
             }
