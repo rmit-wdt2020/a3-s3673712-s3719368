@@ -19,7 +19,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             client = WebApi.InitializeClient();
         }
 
-        public async Task<IEnumerable<TransactionDto>> GetAllTransaction() 
+        public async Task<IEnumerable<TransactionDto>> GetAllTransaction() //get all transactions from web api using the httpclient
         {
             var response = await client.GetAsync("api/Transactions");
             if (!response.IsSuccessStatusCode)
@@ -35,7 +35,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
 
         }
 
-        public async Task<IEnumerable<TransactionDto>> GetTransaction(int? id) 
+        public async Task<IEnumerable<TransactionDto>> GetTransaction(int? id)  //get transaction with spefic id from web api
         {
             if (id == null)
                 return null;
@@ -52,7 +52,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
 
         }
 
-        public IEnumerable<TransactionDto> FliterByDate(IEnumerable<TransactionDto> transactions, DateTime FromDate, DateTime ToDate) 
+        public IEnumerable<TransactionDto> FliterByDate(IEnumerable<TransactionDto> transactions, DateTime FromDate, DateTime ToDate) //fliter transaction by date, only returns transaction  in dates
         {
             List<TransactionDto> transactionArray = transactions.ToList();
             if (transactionArray[0].TransactionTimeUtc > FromDate)
@@ -68,7 +68,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             return transactionArray;
         }
 
-        public string GetTimePeriodOfTransaction(DateTime FromDate, DateTime ToDate) 
+        public string GetTimePeriodOfTransaction(DateTime FromDate, DateTime ToDate) //return string of months between 2 dates
         {
             string period = "";
 
@@ -80,7 +80,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             return period;
         }
 
-        public string GetDataBetweenMonth(IEnumerable<TransactionDto> transactions, DateTime FromDate, DateTime ToDate) 
+        public string GetDataBetweenMonth(IEnumerable<TransactionDto> transactions, DateTime FromDate, DateTime ToDate) //get transaction total money data between 2 months
         {
             string data = "";
             List<TransactionDto> transactionArray = transactions.ToList();
@@ -99,7 +99,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             return data;
         }
 
-        public string GetFrequnceyBetweenMonth(IEnumerable<TransactionDto> transactions, DateTime FromDate, DateTime ToDate) 
+        public string GetFrequnceyBetweenMonth(IEnumerable<TransactionDto> transactions, DateTime FromDate, DateTime ToDate) //get transaction frequency data between 2 months
         {
             string data = "";
             List<TransactionDto> transactionArray = transactions.ToList();
@@ -115,7 +115,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             return data;
         }
 
-        public decimal GetMonthsTotal(int Month, IEnumerable<TransactionDto> transactions) 
+        public decimal GetMonthsTotal(int Month, IEnumerable<TransactionDto> transactions)  //get the total money of transactions in a month
         {
             decimal total = 0;
             foreach (TransactionDto item in transactions)
@@ -129,7 +129,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             return total;
         }
 
-        public int GetFrequnceyMonthTotal(int Month, IEnumerable<TransactionDto> transactions) 
+        public int GetFrequnceyMonthTotal(int Month, IEnumerable<TransactionDto> transactions)  //get the transaction times of transactions in a month
         {
             int total = 0;
             foreach (TransactionDto item in transactions)
@@ -143,7 +143,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             return total;
         }
 
-        public string GetTrasnactionTypeList() 
+        public string GetTrasnactionTypeList() //return all type of transaction type
         {
             string list = "";
             foreach (string typeString in Enum.GetNames(typeof(TransactionType))) 
@@ -153,7 +153,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             return list;
         }
 
-        public string GetTransactionTypeData(IEnumerable<TransactionDto> transactions)
+        public string GetTransactionTypeData(IEnumerable<TransactionDto> transactions) //get count of transaction types amoung a group of transactions
         {
             string result = "";
             foreach (string typeString in Enum.GetNames(typeof(TransactionType)))
@@ -163,7 +163,7 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
             return result;
         }
 
-        public int GetTransactionTypeCount(string type, IEnumerable<TransactionDto> transactions) 
+        public int GetTransactionTypeCount(string type, IEnumerable<TransactionDto> transactions) //count the amount of  1 type of transaction in a group of transactions
         {
             int count = 0;
             foreach (TransactionDto transaction in transactions) 

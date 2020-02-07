@@ -20,17 +20,17 @@ namespace BankAPI.Models.DataManager
             _context = context;
         }
 
-        public Account Get(int id)
+        public Account Get(int id) //get Account with specific id
         {
             return _context.Accounts.Include(c => c.Transactions).Include(e => e.BillPays).FirstOrDefault(e=> e.AccountNumber == id);
         }
 
-        public IEnumerable<Account> GetAll()
+        public IEnumerable<Account> GetAll()  //get all accounts include transaction and bill pay
         {
             return _context.Accounts.Include(c => c.Transactions).Include(e => e.BillPays).ToList();
         }
 
-        public int Add(Account account)
+        public int Add(Account account) //insert account obj into datbase
         {
             _context.Accounts.Add(account);
             _context.SaveChanges();
@@ -38,7 +38,7 @@ namespace BankAPI.Models.DataManager
             return account.CustomerID;
         }
 
-        public int Delete(int id)
+        public int Delete(int id) //delete account by Id
         {
             _context.Accounts.Remove(_context.Accounts.Find(id));
             _context.SaveChanges();
@@ -46,7 +46,7 @@ namespace BankAPI.Models.DataManager
             return id;
         }
 
-        public int Update(int id, Account account)
+        public int Update(int id, Account account) //Update the account in datatbase with specific id
         {
             _context.Update(account);
             _context.SaveChanges();

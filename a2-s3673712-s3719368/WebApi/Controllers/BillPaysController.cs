@@ -21,35 +21,35 @@ namespace WebApi.Controllers
             _repo = repo;
         }
 
-        // GET: api/movies
+        // GET: api/billpays
         [HttpGet]
         public IEnumerable<BillPay> Get()
         {
             return _repo.GetAll();
         }
 
-        // GET api/movies/1
+        // GET api/billpays/1
         [HttpGet("{id}")]
         public BillPay Get(int id)
         {
             return _repo.Get(id);
         }
 
-        // POST api/movies
+        // POST api/billpays
         [HttpPost]
         public void Post([FromBody] BillPay billpay)
         {
             _repo.Add(billpay);
         }
 
-        // PUT api/movies
+        // PUT api/billpays
         [HttpPut]
         public void Put([FromBody] BillPay billpay)
         {
             _repo.Update(billpay.BillPayID, billpay);
         }
 
-        // DELETE api/movies/1
+        // DELETE api/billpays/1
         [HttpDelete("{id}")]
         public long Delete(int id)
         {

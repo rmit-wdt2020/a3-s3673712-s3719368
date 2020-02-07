@@ -19,17 +19,17 @@ namespace WebApi.Models.DataManager
             _context = context;
         }
 
-        public Payee Get(int id)
+        public Payee Get(int id) //get Payee with specific id
         {
             return _context.Payees.Find(id);
         }
 
-        public IEnumerable<Payee> GetAll()
+        public IEnumerable<Payee> GetAll() //get all payees include billpay
         {
             return _context.Payees.Include(b => b.BillPay).ToList();
         }
 
-        public int Add(Payee payee)
+        public int Add(Payee payee) //insert Payee obj into datbase
         {
             _context.Payees.Add(payee);
             _context.SaveChanges();
@@ -37,7 +37,7 @@ namespace WebApi.Models.DataManager
             return payee.PayeeID;
         }
 
-        public int Delete(int id)
+        public int Delete(int id) //delete Payee by Id
         {
             _context.Payees.Remove(_context.Payees.Find(id));
             _context.SaveChanges();
@@ -45,7 +45,7 @@ namespace WebApi.Models.DataManager
             return id;
         }
 
-        public int Update(int id, Payee payee)
+        public int Update(int id, Payee payee) //Update the payee in datatbase with specific id
         {
             _context.Update(payee);
             _context.SaveChanges();

@@ -20,17 +20,17 @@ namespace WebApi.Models.DataManager
             _context = context;
         }
 
-        public Login Get(int id)//get by customerID
+        public Login Get(int id)//get login by customerID
         {
             return _context.Logins.Where(e => e.CustomerID == id).FirstOrDefault();
         }
 
-        public IEnumerable<Login> GetAll()
+        public IEnumerable<Login> GetAll() //get all customers include account
         {
             return _context.Logins.Include(c => c.Customer).ThenInclude(a => a.Accounts).ToList();
         }
 
-        public int Add(Login login)
+        public int Add(Login login) //insert login obj into datbase
         {
             _context.Logins.Add(login);
             _context.SaveChanges();
@@ -38,7 +38,7 @@ namespace WebApi.Models.DataManager
             return Convert.ToInt32(login.LoginID);
         }
 
-        public int Delete(int id)
+        public int Delete(int id) //delete login by Id
         {
             _context.Logins.Remove(_context.Logins.Find(id));
             _context.SaveChanges();
@@ -46,7 +46,7 @@ namespace WebApi.Models.DataManager
             return id;
         }
 
-        public int Update(int id, Login login)
+        public int Update(int id, Login login) //update login by Id
         {
             _context.Update(login);
             _context.SaveChanges();
