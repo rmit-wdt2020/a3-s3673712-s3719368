@@ -49,7 +49,7 @@ To Lock an Login, using button Lock/Unlock. A checkbox will be shown in the view
             loginManger.Lock(login, !login.Lock); //Change to true(Lock) or false(Unlock) when button clicked
                 return View(login);
 ```
-##References
+## References
 + Codes are copied and modified from lecture examples/ lab examples from weeks 4-9 
 + Css stylesheet from [fontawesome-icon](https://fontawesome.com/)
 + images copied and modified from internet:
