@@ -2,7 +2,7 @@
 
 namespace a2_s3673712_s3719368.Models.Repository
 {
-    public interface IDataRepository<TEntity, TKey> where TEntity : class
+    public interface IDataRepository<TEntity, TKey> where TEntity : class //Tie entity with key
     {
         IEnumerable<TEntity> GetAll();
         TEntity Get(TKey id);

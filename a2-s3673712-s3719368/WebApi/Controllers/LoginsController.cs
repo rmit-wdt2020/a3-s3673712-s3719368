@@ -22,35 +22,35 @@ namespace BankAPI.Controllers
             _repo = repo;
         }
 
-        // GET: api/movies
+        // GET: api/logins
         [HttpGet]
         public IEnumerable<Login> Get()
         {
             return _repo.GetAll();
         }
 
-        // GET api/movies/1
+        // GET api/logins/1
         [HttpGet("{id}")]
         public Login Get(int id)
         {
             return _repo.Get(id);
         }
 
-        // POST api/movies
+        // POST api/logins
         [HttpPost]
         public void Post([FromBody] Login login)
         {
             _repo.Add(login);
         }
 
-        // PUT api/movies
+        // PUT api/logins
         [HttpPut]
         public void Put([FromBody] Login login)
         {
             _repo.Update(Convert.ToInt32(login.LoginID), login);
         }
 
-        // DELETE api/movies/1
+        // DELETE api/logins/1
         [HttpDelete("{id}")]
         public long Delete(int id)
         {

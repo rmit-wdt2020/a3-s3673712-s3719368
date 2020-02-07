@@ -19,17 +19,17 @@ namespace WebApi.Models.DataManager
             _context = context;
         }
 
-        public Transaction Get(int id)//get by accountnumber
+        public Transaction Get(int id)//get Transaction by accountnumber
         {
             return _context.Transactions.Include(e => e.DestinationAccount).FirstOrDefault(e=> e.TransactionID == id);
         }
 
-        public IEnumerable<Transaction> GetAll()
+        public IEnumerable<Transaction> GetAll() //get all Transactions include billpay
         {
             return _context.Transactions.Include(e => e.DestinationAccount).ToList();
         }
 
-        public int Add(Transaction transaction)
+        public int Add(Transaction transaction) //insert transaction obj into datbase
         {
             _context.Transactions.Add(transaction);
             _context.SaveChanges();
@@ -37,7 +37,7 @@ namespace WebApi.Models.DataManager
             return transaction.TransactionID;
         }
 
-        public int Delete(int id)
+        public int Delete(int id) //delete Transaction by Id
         {
             _context.Transactions.Remove(_context.Transactions.Find(id));
             _context.SaveChanges();
@@ -45,7 +45,7 @@ namespace WebApi.Models.DataManager
             return id;
         }
 
-        public int Update(int id, Transaction transaction)
+        public int Update(int id, Transaction transaction) //Update the Transaction in datatbase with specific id
         {
             _context.Update(transaction);
             _context.SaveChanges();

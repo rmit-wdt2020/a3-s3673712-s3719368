@@ -14,40 +14,40 @@ namespace WebApi.Controllers
     {
         private readonly Models.DataManager.TransactionManager _repo;
 
-        public TransactionsController(Models.DataManager.TransactionManager repo)
+        public TransactionsController(TransactionManager repo)
         {
             _repo = repo;
         }
 
-        // GET: api/movies
+        // GET: api/transactions
         [HttpGet]
         public IEnumerable<Transaction> Get()
         {
             return _repo.GetAll();
         }
 
-        // GET api/movies/1
+        // GET api/transactions/1
         [HttpGet("{id}")]
         public Transaction Get(int id)
         {
             return _repo.Get(id);
         }
 
-        // POST api/movies
+        // POST api/transactions
         [HttpPost]
         public void Post([FromBody] Transaction transaction)
         {
             _repo.Add(transaction);
         }
 
-        // PUT api/movies
+        // PUT api/transactions
         [HttpPut]
         public void Put([FromBody] Transaction transaction)
         {
             _repo.Update(transaction.TransactionID, transaction);
         }
 
-        // DELETE api/movies/1
+        // DELETE api/transactions/1
         [HttpDelete("{id}")]
         public long Delete(int id)
         {

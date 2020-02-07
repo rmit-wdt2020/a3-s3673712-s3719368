@@ -22,35 +22,35 @@ namespace BankAPI.Controllers
             _repo = repo;
         }
 
-        // GET: api/movies
+        // GET: api/customers
         [HttpGet]
         public IEnumerable<Customer> Get()
         {
             return _repo.GetAll();
         }
 
-        // GET api/movies/1
+        // GET api/customers/1
         [HttpGet("{id}")]
         public Customer Get(int id)
         {
             return _repo.Get(id);
         }
 
-        // POST api/movies
+        // POST api/customers
         [HttpPost]
         public void Post([FromBody] Customer customer)
         {
             _repo.Add(customer);
         }
 
-        // PUT api/movies
+        // PUT api/customers
         [HttpPut]
         public void Put([FromBody] Customer customer)
         {
             _repo.Update(customer.CustomerID, customer);
         }
 
-        // DELETE api/movies/1
+        // DELETE api/customers/1
         [HttpDelete("{id}")]
         public long Delete(int id)
         {
