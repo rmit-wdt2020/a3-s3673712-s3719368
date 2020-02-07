@@ -58,10 +58,10 @@
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CustomerID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CustomerID">Details</a> |
-                <a asp-action="Lock" asp-route-id="@item.CustomerID">Lock</a> |
-                <a asp-action="Delete" asp-route-id="@item.CustomerID">Delete</a> |
+                <a asp-action="Edit" asp-route-id="@item.CustomerID"><i class="fas fa-user-edit"></i></a> |
+                
+                <a asp-action="Lock" asp-route-id="@item.CustomerID"><i class="fas fa-user-lock"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.CustomerID"><i class="fas fa-user-times"></i></a> 
 
             </td>
         </tr>

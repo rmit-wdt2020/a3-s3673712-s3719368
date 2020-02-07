@@ -30,26 +30,7 @@ namespace a2_s3673712_s3719368.Controllers
             return View(customers);
         }
 
-        // GET: CustomersMange/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customer = await customerManger.GetCustomer(id);
-
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return View(customer);
-        }
-
-        // GET: CustomersMange/Create
-
+     
 
 
         // GET: CustomersMange/Edit/5
