@@ -60,6 +60,8 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers
             }
 
             IEnumerable<TransactionDto> needed = transactionManager.FliterByDate(transactions, FromDate, ToDate);
+            ViewBag.FromDate = FromDate;
+            ViewBag.ToDate = ToDate;
 
             ViewBag.MonthsLabel = transactionManager.GetTimePeriodOfTransaction(FromDate,ToDate);
             ViewBag.MonthsData = transactionManager.GetDataBetweenMonth(transactions, FromDate, ToDate);

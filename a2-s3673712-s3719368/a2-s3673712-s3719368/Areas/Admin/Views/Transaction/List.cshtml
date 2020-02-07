@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "Transaction List";
 }
+@ViewBag.FromDate
+@ViewBag.ToDate
+@ViewBag.MonthsData
+@Html.Raw(ViewBag.MonthsLabel)
 <h1>Transaction List</h1>
 
 <br>
@@ -76,15 +80,15 @@
             document.getElementById('barcanvas').style.display = "none";
         }
     }
-        
+
 var ctx = document.getElementById('barcanvas').getContext('2d');
 var barChart = new Chart(ctx, {
     type: 'bar',
-    title:  
-      {  
-       display: true,  
-       text: "Total Money of Transaction in Months"  
-      },  
+    title:
+      {
+       display: true,
+       text: "Total Money of Transaction in Months"
+      },
     data: {
         labels: [@Html.Raw(ViewBag.MonthsLabel)],
         datasets: [{
@@ -148,9 +152,9 @@ var barChart = new Chart(ctx, {
             borderWidth: 1
         }]
     },
-    
+
 });
-</script>  
+</script>
 
 <script>
     function DisplayLineChart()
@@ -195,4 +199,4 @@ var barChart = new Chart(ctx, {
         }
     }
 });
- </script>
+</script>

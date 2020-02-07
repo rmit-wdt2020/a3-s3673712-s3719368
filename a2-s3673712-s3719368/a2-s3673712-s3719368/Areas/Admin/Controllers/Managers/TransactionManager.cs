@@ -71,21 +71,47 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
         public string GetTimePeriodOfTransaction(DateTime FromDate, DateTime ToDate) //return string of months between 2 dates
         {
             string period = "";
-
-            for (int i = FromDate.Month; i <= ToDate.Month; i++) 
+            List<int> Months = MonthsBetween(FromDate, ToDate).ToList();
+            foreach (int month in Months) 
             {
-                period += "'" + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i).ToString() + "'" + ",";
+                period += "'" + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month).ToString() + "'" + ",";
             }
 
             return period;
+        }
+        public  IEnumerable<int> MonthsBetween(
+        DateTime startDate,
+        DateTime endDate)
+        {
+            DateTime iterator;
+            DateTime limit;
+
+            if (endDate > startDate)
+            {
+                iterator = new DateTime(startDate.Year, startDate.Month, 1);
+                limit = endDate;
+            }
+            else
+            {
+                iterator = new DateTime(endDate.Year, endDate.Month, 1);
+                limit = startDate;
+            }
+
+            var dateTimeFormat = CultureInfo.CurrentCulture.DateTimeFormat;
+            while (iterator <= limit)
+            {
+                yield return iterator.Month;
+                iterator = iterator.AddMonths(1);
+            }
         }
 
         public string GetDataBetweenMonth(IEnumerable<TransactionDto> transactions, DateTime FromDate, DateTime ToDate) //get transaction total money data between 2 months
         {
             string data = "";
             List<TransactionDto> transactionArray = transactions.ToList();
-            List<int> Months = new List<int>();
-            for (int i = FromDate.ToUniversalTime().Month; i <= ToDate.ToUniversalTime().Month; i++)
+            List<int> Months = MonthsBetween(FromDate, ToDate).ToList();
+
+            for (int i = FromDate.Month; i <= ToDate.Month; i++)
             {
                 Months.Add(i); //add month as group
             }
@@ -103,8 +129,8 @@ namespace a2_s3673712_s3719368.Areas.Admin.Controllers.Managers
         {
             string data = "";
             List<TransactionDto> transactionArray = transactions.ToList();
-            List<int> Months = new List<int>();
-            for (int i = FromDate.ToUniversalTime().Month; i <= ToDate.ToUniversalTime().Month; i++)
+            List<int> Months = MonthsBetween(FromDate, ToDate).ToList();
+            for (int i = FromDate.Month; i <= ToDate.Month; i++)
             {
                 Months.Add(i); //add month as group
             }
