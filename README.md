@@ -1,7 +1,7 @@
 # a3-s3673712-s3719368 - ASP.NET Core Internet Banking website
 ## Contributors
 
-Bach Truong Dao - s3673712	Yongqian Huang - s3719268
+Bach Truong Dao - s3673712	Yongqian Huang - s3719368
 
 ## Structure
 Project 1: a2-s3673712-s371938 - Admin Portal build upon assignment 2 (client side) 
