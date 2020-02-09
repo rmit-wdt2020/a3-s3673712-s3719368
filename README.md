@@ -1,7 +1,7 @@
 # a3-s3673712-s3719368 - ASP.NET Core Internet Banking website
 ## Contributors
 
-Bach Truong Dao - s3673712	Yongqian Huang - s3719268
+Bach Truong Dao - s3673712	Yongqian Huang - s3719368
 
 ## Structure
 Project 1: a2-s3673712-s371938 - Admin Portal build upon assignment 2 (client side) 
@@ -49,9 +49,11 @@ To Lock an Login, using button Lock/Unlock. A checkbox will be shown in the view
             loginManger.Lock(login, !login.Lock); //Change to true(Lock) or false(Unlock) when button clicked
                 return View(login);
 ```
-##References
+## References
 + Codes are copied and modified from lecture examples/ lab examples from weeks 4-9 
 + Css stylesheet from [fontawesome-icon](https://fontawesome.com/)
-+ images copied and modified from internet:
++ Images copied and modified from internet:
 [Error.png](https://images.template.net/wp-content/uploads/2016/09/30143726/Creative-404-Page-Designs.jpg) and
 [Login_background](https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80)
+and RMIT Logo
++ Stackoverflow 
