@@ -19,13 +19,16 @@
                 Payee number
             </th>
             <th>
-               Amount
+                Amount
             </th>
             <th>
                 Schedule Date
             </th>
             <th>
                 Period
+            </th>
+            <th>
+                Status
             </th>
             <th>
                 Modify Date
@@ -36,22 +39,35 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AccountNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Payee.PayeeID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ScheduleDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Period)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Payee.PayeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScheduleDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Period)
+            </td>
+
+                @if (item.Block == true)
+                {
+                  <td>
+                    Block
+                 </td>
+                }
+                else { 
+                    <td>
+                        Unblock
+                    </td>
+                }
+
                 <td>
                     @Html.DisplayFor(modelItem => item.ModifyDate)
                 </td>
