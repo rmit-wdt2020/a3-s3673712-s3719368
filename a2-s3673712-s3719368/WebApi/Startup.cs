@@ -31,16 +31,13 @@ namespace WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddTransient<AccountManager>();
-            services.AddTransient<CustomerManager>();
-            services.AddTransient<LoginManager>();
-            services.AddTransient<TransactionManager>();
-            services.AddTransient<BillPayManager>();
-            services.AddTransient<PayeeManager>();
+            services.AddControllersWithViews();
+
             services.AddDbContext<NationBankContext>(options => //add connection string
             {
                 options.UseSqlServer(Configuration.GetConnectionString(nameof(NationBankContext)));
+                // Enable lazy loading.
+                options.UseLazyLoadingProxies();
             });
         }
 
